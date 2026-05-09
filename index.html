@@ -544,7 +544,7 @@ function doLogin(){
     err.classList.remove('show');
     document.getElementById('login-page').style.display='none';
     document.getElementById('app').classList.add('show');
-    // data embedded above
+    initDashboard();
   } else {
     err.classList.remove('show');
     void err.offsetWidth;
