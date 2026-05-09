@@ -1,0 +1,37 @@
+name: Update Dashboard Data
+
+on:
+  schedule:
+    - cron: '0 * * * *'   # Har ghante
+  workflow_dispatch:        # Manual run bhi ho sake
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Fetch formdata.json from SharePoint & regenerate data_v4.js
+        env:
+          SP_URL: ${{ secrets.SHAREPOINT_URL }}
+        run: python update_data.py
+
+      - name: Commit & push if data changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data_v4.js
+          git diff --staged --quiet || git commit -m "Auto: update data_v4.js [$(date '+%d %b %Y %H:%M')]"
+          git push
