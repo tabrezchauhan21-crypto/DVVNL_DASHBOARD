@@ -21,11 +21,11 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install requests
+        run: pip install requests openpyxl
 
-      - name: Fetch SharePoint data & rebuild index.html
+      - name: Fetch Excel & rebuild dashboard
         env:
-          SP_URL: ${{ secrets.SHAREPOINT_URL }}
+          SP_5KW: ${{ secrets.SP_5KW }}
         run: python update_data.py
 
       - name: Commit & push if changed
