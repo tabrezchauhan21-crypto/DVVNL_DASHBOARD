@@ -31,19 +31,53 @@ if not SP_EXCEL:
     print("ERROR: SP_5KW secret not set!")
     exit(1)
 
-url = SP_EXCEL + ('&' if '?' in SP_EXCEL else '?') + 'download=1'
-print(f"\n[Excel] Downloading workbook...")
-r = requests.get(url, timeout=60)
-r.raise_for_status()
-print(f"[Excel] Downloaded: {len(r.content)//1024} KB")
+import openpyxl, re
 
-try:
-    import openpyxl
-    wb = openpyxl.load_workbook(io.BytesIO(r.content), read_only=True, data_only=True)
-    print(f"[Excel] Sheets: {wb.sheetnames}")
-except ImportError:
-    print("ERROR: openpyxl not installed")
-    exit(1)
+# Try multiple download URL formats for OneDrive for Business
+def get_download_urls(link):
+    urls = []
+    # Method 1: &download=1
+    urls.append(link + ('&' if '?' in link else '?') + 'download=1')
+    # Method 2: _layouts/15/download.aspx with share param
+    m = re.search(r'/g/personal/([^/]+)/([A-Za-z0-9_-]+)\?', link)
+    if m:
+        user, fid = m.group(1), m.group(2)
+        urls.append(f"https://itsaicomputers-my.sharepoint.com/personal/{user}/_layouts/15/download.aspx?share={fid}")
+    # Method 3: UniqueId based
+    urls.append("https://itsaicomputers-my.sharepoint.com/personal/tabrez_alam_thesaicomputers_com/_layouts/15/download.aspx?UniqueId=E56B3B6C-EDB2-4425-966F-DCAB46B35F4B")
+    return urls
+
+print(f"\n[Excel] Downloading workbook from OneDrive...")
+wb = None
+headers = {
+    'User-Agent': 'Mozilla/5.0',
+    'Accept': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,*/*'
+}
+
+for i, url in enumerate(get_download_urls(SP_EXCEL)):
+    try:
+        print(f"[Excel] Trying URL {i+1}...")
+        r = requests.get(url, timeout=60, headers=headers, allow_redirects=True)
+        print(f"[Excel] Downloaded: {len(r.content)//1024} KB | Type: {r.headers.get('Content-Type','?')[:50]}")
+        if len(r.content) < 1000:
+            print(f"[Excel] Too small — skipping")
+            continue
+        wb = openpyxl.load_workbook(io.BytesIO(r.content), read_only=True, data_only=True)
+        print(f"[Excel] Success! Sheets: {wb.sheetnames}")
+        break
+    except Exception as e:
+        print(f"[Excel] URL {i+1} failed: {e}")
+        continue
+
+if not wb:
+    print("[Excel] All download methods failed!")
+    print("[Excel] Trying to use local Excel file if available...")
+    try:
+        wb = openpyxl.load_workbook('Invoice_Verification_Data_Status.xlsx', read_only=True, data_only=True)
+        print(f"[Excel] Local file loaded: {wb.sheetnames}")
+    except:
+        print("ERROR: Cannot load Excel. Exiting.")
+        exit(1)
 
 # ── 2. Extract 10KW (Form sheet) ──────────────────────────────────────────────
 print("\n[10KW] Reading Form sheet...")
