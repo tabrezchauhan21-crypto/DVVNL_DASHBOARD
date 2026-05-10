@@ -504,6 +504,7 @@ tr:last-child td{border-bottom:none}
             <option>UNDER VERIFICATION</option>
             <option>CPC</option>
             <option>ANNEXURE SUBMIT TO ZONE</option>
+            <option>ERP</option>
           </select>
         </div>
         <div class="fbtns">
@@ -818,6 +819,7 @@ var RECORDS_5KW=[{"zone":"AGRA","month":"March","year":"2026","miro":"5100147979
 var MONTHS_ARR=["January","February","March","April","May","June","July","August","September","October","November","December"];
 var ST5={
   "PAID":{c:"var(--green)",bg:"rgba(34,197,94,.13)",br:"rgba(34,197,94,.35)",lb:"PAID"},
+  "ERP":{c:"#10b981",bg:"rgba(16,185,129,.13)",br:"rgba(16,185,129,.35)",lb:"ERP ✓"},
   "SUBMIT TO HV CELL":{c:"var(--teal)",bg:"rgba(0,196,216,.13)",br:"rgba(0,196,216,.35)",lb:"HV Cell"},
   "ANNEXURE SUBMIT TO ZONE":{c:"var(--sky)",bg:"rgba(56,189,248,.13)",br:"rgba(56,189,248,.35)",lb:"Ann/Zone"},
   "CPC":{c:"var(--gold)",bg:"rgba(245,158,11,.13)",br:"rgba(245,158,11,.35)",lb:"CPC"},
@@ -898,8 +900,8 @@ function p2KPIs(){
   s70.forEach(function(s){cnt70[s]=0;});
   p2All.forEach(function(r){if(cnt70[r.status_70]!==undefined)cnt70[r.status_70]++;});
   // 30% stages
-  var s30=["PAID","SUBMIT TO HV CELL","UNDER VERIFICATION","CPC","ANNEXURE SUBMIT TO ZONE"];
-  var c30={"PAID":"var(--green)","SUBMIT TO HV CELL":"var(--teal)","UNDER VERIFICATION":"#f97316","CPC":"var(--gold)","ANNEXURE SUBMIT TO ZONE":"var(--sky)"};
+  var s30=["PAID","ERP","SUBMIT TO HV CELL","UNDER VERIFICATION","CPC","ANNEXURE SUBMIT TO ZONE"];
+  var c30={"PAID":"var(--green)","ERP":"#10b981","SUBMIT TO HV CELL":"var(--teal)","UNDER VERIFICATION":"#f97316","CPC":"var(--gold)","ANNEXURE SUBMIT TO ZONE":"var(--sky)"};
   var cnt30={};
   s30.forEach(function(s){cnt30[s]=0;});
   p2All.forEach(function(r){if(cnt30[r.status_30]!==undefined)cnt30[r.status_30]++;});
@@ -923,9 +925,9 @@ function p2ZoneTable(){
 }
 function p2Summary(){
   // Group pending zones by 30% stage
-  var stages=["ANNEXURE SUBMIT TO ZONE","CPC","SUBMIT TO HV CELL","UNDER VERIFICATION"];
-  var stageColors={"ANNEXURE SUBMIT TO ZONE":"var(--sky)","CPC":"var(--gold)","SUBMIT TO HV CELL":"var(--teal)","UNDER VERIFICATION":"#f97316"};
-  var stageNames={"ANNEXURE SUBMIT TO ZONE":"Annexure Submit to Zone","CPC":"CPC","SUBMIT TO HV CELL":"Submit to HV Cell","UNDER VERIFICATION":"Under Verification"};
+  var stages=["UNDER VERIFICATION","ANNEXURE SUBMIT TO ZONE","CPC","SUBMIT TO HV CELL","ERP"];
+  var stageColors={"UNDER VERIFICATION":"#f97316","ANNEXURE SUBMIT TO ZONE":"var(--sky)","CPC":"var(--gold)","SUBMIT TO HV CELL":"var(--teal)","ERP":"#10b981"};
+  var stageNames={"UNDER VERIFICATION":"Under Verification","ANNEXURE SUBMIT TO ZONE":"Annexure Submit to Zone","CPC":"CPC","SUBMIT TO HV CELL":"Submit to HV Cell","ERP":"ERP (SAP Entry)"};
   var grouped={};
   stages.forEach(function(s){grouped[s]=[];});
   p2Data.forEach(function(r){
