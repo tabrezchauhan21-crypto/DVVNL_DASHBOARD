@@ -354,6 +354,155 @@ tr:last-child td{border-bottom:none}
 #p2 #p2-summary-grid > div{background:var(--p2-surf)!important}
 </style>
 
+<style id="p4-styles">
+#p4{
+  --p4-bg:#090f1a;--p4-surf:#0d1b2a;--p4-surf2:#102030;
+  --p4-gold:#f59e0b;--p4-gold2:#d97706;
+  --p4-green:#22c55e;--p4-red:#ef4444;--p4-sky:#38bdf8;
+  --p4-purple:#a78bfa;--p4-teal:#00c4d8;--p4-orange:#f97316;
+  --p4-border:rgba(245,158,11,.15);--p4-muted:#4a6a50;
+  --p4-text:#ecfdf5;
+}
+#p4{background:var(--p4-bg)!important;border-radius:12px;padding:8px}
+#p4 .fbar{background:var(--p4-surf)!important;border-color:var(--p4-border)!important}
+#p4 .fbar label{color:var(--p4-gold)!important}
+#p4 select{background:var(--p4-surf)!important;border-color:var(--p4-border)!important;color:var(--p4-text)!important}
+#p4 .panel{background:var(--p4-surf)!important;border-color:var(--p4-border)!important}
+#p4 .ph{background:rgba(245,158,11,.06)!important;border-color:var(--p4-border)!important}
+#p4 .pt{color:var(--p4-gold)!important}
+#p4 .pc{color:var(--p4-muted)!important}
+#p4 thead tr{background:rgba(245,158,11,.08)!important}
+#p4 th{color:var(--p4-gold)!important;border-color:var(--p4-border)!important}
+#p4 td{border-color:rgba(245,158,11,.07)!important}
+#p4 tr:hover td{background:rgba(245,158,11,.05)!important}
+
+/* P4 Month Nav */
+#p4-md{
+  background:var(--p4-surf)!important;border:1px solid var(--p4-gold)!important;
+  border-radius:7px;padding:6px 14px;font-family:var(--fh);font-size:.95rem;
+  font-weight:600;color:var(--p4-gold)!important;min-width:160px;text-align:center;
+  cursor:pointer;position:relative;user-select:none;white-space:nowrap;
+}
+#p4-pop{
+  position:absolute;top:calc(100% + 6px);left:50%;transform:translateX(-50%);
+  background:var(--p4-surf2);border:1px solid var(--p4-gold);
+  border-radius:10px;padding:12px;z-index:400;display:none;
+  min-width:295px;box-shadow:0 14px 48px rgba(0,0,0,.8);
+}
+
+/* P4 Summary KPIs */
+.p4-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:14px}
+.p4-kpi{
+  background:var(--p4-surf);border:1px solid var(--p4-border);
+  border-radius:12px;padding:14px 16px;
+}
+.p4-kpi-l{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:4px}
+.p4-kpi-v{font-family:var(--fh);font-size:1.5rem;font-weight:700;line-height:1}
+.p4-kpi-s{font-size:.7rem;color:var(--muted);margin-top:4px}
+
+/* P4 Hero */
+.p4-hero{
+  background:var(--p4-surf);border:1px solid var(--p4-border);
+  border-radius:12px;padding:18px 20px;margin-bottom:14px;
+  display:flex;flex-wrap:wrap;gap:18px;align-items:center;
+}
+.p4-hero-month{font-family:var(--fh);font-size:1.5rem;font-weight:700;color:var(--p4-gold)}
+.p4-hero-stats{display:flex;gap:18px;flex-wrap:wrap}
+.p4-hs{text-align:center;min-width:80px}
+.p4-hs-v{font-family:var(--fh);font-size:1.2rem;font-weight:700}
+.p4-hs-l{font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.p4-hero-bar-wrap{flex:1;min-width:200px}
+.p4-hero-lbl{display:flex;justify-content:space-between;font-size:.72rem;margin-bottom:5px;color:var(--muted)}
+.p4-hero-bar{height:8px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden}
+.p4-hero-fill{height:100%;border-radius:4px;transition:width .4s}
+
+/* P4 Zone Grid */
+.p4-zone-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;padding:14px}
+.p4-zcard{
+  background:var(--p4-surf2);border:1px solid var(--p4-border);
+  border-radius:10px;padding:14px;
+}
+.p4-zc-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.p4-zc-name{font-family:var(--fh);font-weight:700;font-size:1rem}
+.p4-zc-amt{font-family:var(--fm);font-size:.82rem;font-weight:600}
+.p4-stage-row{display:flex;align-items:center;gap:8px;margin-top:6px;font-size:.72rem}
+.p4-stage-lbl{width:28px;color:var(--muted)}
+.p4-stage-bar{flex:1;height:5px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden}
+.p4-stage-fill{height:100%;border-radius:3px}
+.p4-stage-badge{
+  font-size:.62rem;padding:2px 7px;border-radius:4px;font-weight:700;white-space:nowrap;
+}
+
+/* P4 Trend Table */
+.p4-trend-tbl{width:100%;border-collapse:collapse;font-size:.75rem}
+.p4-trend-tbl th{padding:7px 10px;text-align:center;white-space:nowrap;position:sticky;top:0;background:var(--p4-surf)}
+.p4-trend-tbl td{padding:6px 10px;text-align:center;white-space:nowrap}
+.p4-trend-tbl .zone-col{text-align:left;font-weight:700;font-size:.8rem;color:var(--p4-gold)}
+.p4-stage-cell{font-size:.65rem;padding:3px 6px;border-radius:4px;font-weight:600;display:inline-block}
+.p4-paid{background:rgba(34,197,94,.12);color:#22c55e;border:1px solid rgba(34,197,94,.25)}
+.p4-hvcell{background:rgba(245,158,11,.12);color:#f59e0b;border:1px solid rgba(245,158,11,.25)}
+.p4-cpc{background:rgba(168,85,247,.12);color:#a78bfa;border:1px solid rgba(168,85,247,.25)}
+.p4-annex{background:rgba(56,189,248,.12);color:#38bdf8;border:1px solid rgba(56,189,248,.25)}
+.p4-uv{background:rgba(239,68,68,.12);color:#ef4444;border:1px solid rgba(239,68,68,.25)}
+
+/* P4 Sub-Tabs */
+.p4-tabs{display:flex;gap:6px;margin-bottom:0;padding:0 2px}
+.p4-tab{
+  padding:8px 16px;border-radius:8px 8px 0 0;border:1px solid var(--p4-border);
+  background:var(--p4-surf);color:var(--muted);cursor:pointer;font-size:.8rem;
+  font-weight:600;transition:all .15s;border-bottom:none;
+}
+.p4-tab.active{background:var(--p4-surf2);color:var(--p4-gold);border-color:var(--p4-gold)}
+.p4-tab-cnt{
+  display:inline-block;background:rgba(245,158,11,.15);color:var(--p4-gold);
+  border-radius:10px;padding:1px 7px;font-size:.67rem;font-weight:700;margin-left:5px;
+}
+
+/* P4 Amount badges */
+.p4-amt-l{font-size:.7rem;color:var(--muted)}
+.p4-amt-v{font-family:var(--fm);font-size:.85rem;font-weight:600}
+.amt-crore{color:var(--p4-orange)}
+.amt-lakh{color:var(--p4-gold)}
+.amt-thou{color:var(--p4-sky)}
+
+/* P4 Combined Hero Boxes */
+.p4-hero-box{
+  background:var(--p4-surf);border:1px solid var(--p4-border);
+  border-radius:12px;padding:16px 18px;
+}
+/* P4 Pipeline rows */
+.p4-pipe-row{
+  display:grid;grid-template-columns:160px 1fr 1fr;gap:14px;
+  padding:12px 16px;border-bottom:1px solid rgba(245,158,11,.07);
+  align-items:start;transition:background .15s;
+}
+.p4-pipe-row:hover{background:rgba(245,158,11,.04)}
+.p4-pipe-row:last-child{border-bottom:none}
+.p4-pipe-current{background:rgba(245,158,11,.06)!important;border-left:3px solid var(--p4-gold)}
+.p4-pipe-month{min-width:140px}
+.p4-pipe-stages{flex:1}
+.p4-pipe-zones{flex:1;display:flex;flex-wrap:wrap;align-content:flex-start;gap:3px}
+@media(max-width:768px){.p4-pipe-row{grid-template-columns:1fr!important;}.p4-hero-box{grid-column:1/-1}}
+
+/* P4 Main Table */
+.p4-main-tbl{width:100%;border-collapse:collapse;font-size:.82rem}
+.p4-main-tbl th,.p4-main-tbl td{padding:9px 12px;border:1px solid rgba(245,158,11,.1)}
+.p4-main-tbl thead th{font-family:var(--fh);font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.p4-th-5kw{background:rgba(0,196,216,.08)!important;color:var(--teal)!important;text-align:center}
+.p4-th-10kw{background:rgba(245,158,11,.1)!important;color:var(--p4-gold)!important;text-align:center}
+.p4-th-total{background:rgba(168,85,247,.08)!important;color:var(--purple)!important;text-align:center}
+.p4-main-tbl tbody tr:hover td{background:rgba(245,158,11,.04)!important}
+.p4-main-tbl tfoot td{font-family:var(--fh);font-weight:700;background:rgba(245,158,11,.08)!important;border-top:2px solid rgba(245,158,11,.3)!important}
+.p4-zone-cell{font-family:var(--fh);font-weight:700;position:sticky;left:0;background:var(--surf)!important;z-index:2}
+.p4-amt-cell{text-align:right;font-family:var(--fm);font-size:.78rem}
+.p4-total-cell{text-align:right;font-family:var(--fh);font-weight:700;color:var(--purple)}
+/* P4 Pipeline */
+.p4-pipe-row{display:grid;grid-template-columns:140px 220px 1fr;gap:12px;padding:11px 16px;border-bottom:1px solid rgba(245,158,11,.07);align-items:start}
+.p4-pipe-row:hover{background:rgba(245,158,11,.04)}
+.p4-pipe-row:last-child{border-bottom:none}
+.p4-pipe-current{background:rgba(245,158,11,.06)!important;border-left:3px solid var(--p4-gold)}
+@media(max-width:768px){.p4-pipe-row{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 
@@ -430,11 +579,10 @@ tr:last-child td{border-bottom:none}
         <span class="ptab-badge">Coming</span>
         <span class="coming-soon-badge">SOON</span>
       </button>
-      <button class="ptab" onclick="switchProj('p4')" id="ptab-p4">
+      <button class="ptab" onclick="switchProj('p4')" id="ptab-p4" style="--tab-ac:var(--gold)">
         <span class="ptab-icon">💰</span>
         MRI FINANCIAL STATUS
-        <span class="ptab-badge">Coming</span>
-        <span class="coming-soon-badge">SOON</span>
+        <span class="ptab-badge">29 Months</span>
       </button>
       <button class="ptab" onclick="switchProj('p5')" id="ptab-p5">
         <span class="ptab-icon">📊</span>
@@ -593,15 +741,111 @@ tr:last-child td{border-bottom:none}
       </div>
     </div>
 
-    <!-- ── PROJECT 4: MRI FINANCIAL ── -->
+    <!-- ── PROJECT 4: MRI FINANCIAL STATUS ── -->
     <div class="proj-panel" id="p4">
-      <div class="coming-soon">
-        <div class="cs-icon">💰</div>
-        <div class="cs-title">MRI Project Financial Status</div>
-        <div class="cs-sub">Payment tracking, invoice amounts, and financial analytics will appear here once data source is configured.</div>
-        <div class="cs-badge">⏳ COMING SOON</div>
+      <div class="fbar">
+        <div class="fg">
+          <label>📅 Month / Year</label>
+          <div class="mnav">
+            <button class="nbtn" id="p4-prev" onclick="p4ShiftM(-1)">◀</button>
+            <div id="p4-md" onclick="p4TglPop(event)">Loading...
+              <div id="p4-pop"></div>
+            </div>
+            <button class="nbtn" id="p4-next" onclick="p4ShiftM(1)">▶</button>
+          </div>
+        </div>
+        <div class="fbtns">
+          <button class="btn btn-g" onclick="p4Reset()">Reset</button>
+          <button class="btn btn-e" onclick="p4Export()">⬇ CSV</button>
+        </div>
       </div>
-    </div>
+
+      <!-- MAIN: DVVNL Payment Status Table -->
+      <div class="panel" style="border-radius:11px;margin-bottom:14px">
+        <div class="ph">
+          <span class="pt" style="color:var(--p4-gold)">💰 DVVNL PAYMENT STATUS — MRI PROJECT</span>
+          <span class="pc" id="p4-main-pc">–</span>
+        </div>
+        <div class="twrap" style="padding:0">
+          <table class="p4-main-tbl">
+            <thead>
+              <tr>
+                <th rowspan="2" style="text-align:left;min-width:100px;position:sticky;left:0;background:var(--p4-surf)">ZONE</th>
+                <th colspan="3" class="p4-th-5kw">🔌 5KW – 9KW</th>
+                <th colspan="2" class="p4-th-10kw">⚡ 10KW+</th>
+                <th rowspan="2" class="p4-th-total">TOTAL OUTSTANDING</th>
+              </tr>
+              <tr>
+                <th class="p4-th-5kw" style="font-size:.7rem">70% Amount</th>
+                <th class="p4-th-5kw" style="font-size:.7rem">Stage</th>
+                <th class="p4-th-5kw" style="font-size:.7rem">30% Retention</th>
+                <th class="p4-th-10kw" style="font-size:.7rem">Amount</th>
+                <th class="p4-th-10kw" style="font-size:.7rem">Stage</th>
+              </tr>
+            </thead>
+            <tbody id="p4-main-tbody"></tbody>
+            <tfoot id="p4-main-tfoot"></tfoot>
+          </table>
+        </div>
+      </div>
+
+      <!-- PENDING PIPELINE -->
+      <div class="panel" style="border-radius:11px;margin-bottom:14px">
+        <div class="ph">
+          <span class="pt" style="color:var(--p4-gold)">📋 Outstanding Pipeline — All Pending Months</span>
+          <span class="pc" id="p4-pipe-pc">Paid months excluded</span>
+        </div>
+        <div id="p4-pipeline-body" style="padding:0"></div>
+      </div>
+
+      <!-- SUB-TABS -->
+      <div class="p4-tabs">
+        <div class="p4-tab active" id="p4tab-5kw"   onclick="p4SwitchTab('5kw')">🔌 5KW Detail <span class="p4-tab-cnt" id="p4tcnt-5kw">–</span></div>
+        <div class="p4-tab"        id="p4tab-10kw"  onclick="p4SwitchTab('10kw')">⚡ 10KW History <span class="p4-tab-cnt" id="p4tcnt-10kw">–</span></div>
+        <div class="p4-tab"        id="p4tab-trend" onclick="p4SwitchTab('trend')">📈 Trend <span class="p4-tab-cnt">All Months</span></div>
+      </div>
+
+      <!-- 5KW DETAIL -->
+      <div class="panel" id="p4panel-5kw" style="border-radius:0 11px 11px 11px;margin-bottom:14px">
+        <div class="ph"><span class="pt">5KW–9KW Invoice Detail</span><span class="pc" id="p4-5kw-pc">–</span></div>
+        <div class="twrap"><table>
+          <thead><tr>
+            <th>Zone</th><th>Month</th><th>Invoice No.</th>
+            <th style="text-align:right">Basic (₹)</th><th style="text-align:right">GST (₹)</th>
+            <th style="text-align:right">Total (₹)</th>
+            <th style="text-align:center">70% Stage</th><th style="text-align:right">70% Amt</th>
+            <th style="text-align:center">30% Stage</th><th style="text-align:right">30% Amt</th>
+          </tr></thead>
+          <tbody id="p4-5kw-tbody"></tbody>
+        </table></div>
+        <div class="pgn" id="p4-5kw-pgn"></div>
+      </div>
+
+      <!-- 10KW HISTORY -->
+      <div class="panel" id="p4panel-10kw" style="display:none;border-radius:0 11px 11px 11px;margin-bottom:14px">
+        <div class="ph"><span class="pt">10KW+ Monthly Payment History</span><span class="pc" id="p4-10kw-pc">All months</span></div>
+        <div class="twrap"><table>
+          <thead><tr>
+            <th>Month</th>
+            <th style="text-align:right">Invoice Amount (₹)</th>
+            <th style="text-align:center">Stage</th>
+            <th style="text-align:center">Status</th>
+          </tr></thead>
+          <tbody id="p4-10kw-tbody"></tbody>
+        </table></div>
+      </div>
+
+      <!-- TREND -->
+      <div class="panel" id="p4panel-trend" style="display:none;border-radius:0 11px 11px 11px;margin-bottom:14px">
+        <div class="ph"><span class="pt">All Months — Zone-wise 30% Stage (5KW) + 10KW</span><span class="pc">Oldest → Newest</span></div>
+        <div style="overflow-x:auto;padding:12px">
+          <table class="p4-trend-tbl"><thead id="p4-trend-head"></thead><tbody id="p4-trend-body"></tbody></table>
+        </div>
+        <div class="ph" style="margin-top:14px"><span class="pt">Monthly Invoice Amount — 5KW (₹)</span></div>
+        <div id="p4-amt-trend" style="overflow-x:auto;padding:12px 14px 16px"></div>
+      </div>
+
+    </div><!-- /p4 -->
 
     <!-- ── PROJECT 5: CLUSTER BILLING FINANCIAL ── -->
     <div class="proj-panel" id="p5">
@@ -615,6 +859,7 @@ tr:last-child td{border-bottom:none}
 
   </div><!-- /main -->
 </div><!-- /app -->
+
 
 <script>
 // ═══════════════════════════════════════════
@@ -1045,6 +1290,205 @@ if(typeof MONTHLY_STATUS!=='undefined'&&typeof MASTER_ALL!=='undefined'){
 } else {
   window.addEventListener('load',()=>{});
 }
+
+
+// P4 FINANCIAL v4
+const P4M=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const P4_PAGE=30;
+const P4_STAGES={'PAID':{label:'✅ PAID',cls:'p4-paid',color:'#22c55e'},'CPC':{label:'💻 CPC',cls:'p4-cpc',color:'#a78bfa'},'ERP':{label:'🖥 ERP',cls:'p4-cpc',color:'#818cf8'},'MD APPROVAL':{label:'📋 MD APPR.',cls:'p4-annex',color:'#38bdf8'},'SUBMIT TO HV CELL':{label:'📨 HV CELL',cls:'p4-hvcell',color:'#f59e0b'},'ANNEXURE SUBMIT TO ZONE':{label:'📎 ANNEXURE',cls:'p4-annex',color:'#38bdf8'},'SUBMIT TO ZONE OFFICE':{label:'📎 ZONE OFFICE',cls:'p4-annex',color:'#38bdf8'},'RE-VERIFICATION':{label:'🔁 RE-VER.',cls:'p4-uv',color:'#fb923c'},'UNDER VERIFICATION':{label:'🔍 UNDER VER.',cls:'p4-uv',color:'#ef4444'}};
+function p4SI(s){if(!s||!s.trim())return{label:'—',cls:'p4-uv',color:'#4a6a50'};const u=s.trim().toUpperCase();for(const k of Object.keys(P4_STAGES))if(k&&u.includes(k))return P4_STAGES[k];return{label:s,cls:'p4-uv',color:'#ef4444'};}
+function p4Badge(s){const si=p4SI(s);return`<span class="p4-stage-cell ${si.cls}">${si.label}</span>`;}
+function p4Fmt(n){if(!n||isNaN(n)||n===0)return'—';if(n>=10000000)return'₹'+(n/10000000).toFixed(2)+'Cr';if(n>=100000)return'₹'+(n/100000).toFixed(2)+'L';if(n>=1000)return'₹'+(n/1000).toFixed(1)+'K';return'₹'+n.toFixed(0);}
+function p4FmtFull(n){if(!n||isNaN(n))return'—';return'₹'+n.toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2});}
+let p4SM='',p4SY='',p4AMY=[],p4CurTab='5kw',p4Page5=1;
+function p4Init(){
+  if(!window.RECORDS_5KW||!RECORDS_5KW.length){console.warn('[P4] No 5KW data');return;}
+  const mySet=new Set(RECORDS_5KW.map(r=>r.month+'_'+r.year));
+  if(window.RECORDS_10KW)RECORDS_10KW.forEach(r=>mySet.add(r.month+'_'+r.year));
+  p4AMY=[...mySet].map(k=>{const[m,y]=k.split('_');return{month:m,year:y};}).sort((a,b)=>{const d=parseInt(a.year)-parseInt(b.year);return d||P4M.indexOf(a.month)-P4M.indexOf(b.month);});
+  const last=p4AMY[p4AMY.length-1];p4SM=last.month;p4SY=last.year;
+  p4BuildPop();p4ApplyF();p4RenderTrend();
+  document.addEventListener('click',e=>{const p=document.getElementById('p4-pop');if(p&&!e.target.closest('#p4-md'))p.style.display='none';});
+}
+function p4BuildPop(){
+  const yrs=[...new Set(p4AMY.map(m=>m.year))].sort();
+  let h=`<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">`;
+  yrs.forEach(y=>h+=`<span onclick="p4SelY('${y}',event)" style="padding:5px 12px;border-radius:6px;cursor:pointer;font-weight:700;font-size:.82rem;border:1px solid ${y===p4SY?'var(--p4-gold)':'rgba(245,158,11,.2)'};background:${y===p4SY?'rgba(245,158,11,.18)':'transparent'};color:${y===p4SY?'var(--p4-gold)':'var(--muted)'}">${y}</span>`);
+  h+=`</div><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px">`;
+  P4M.forEach(m=>{const has=p4AMY.some(x=>x.month===m&&x.year===p4SY);const sel=m===p4SM;h+=`<span onclick="${has?`p4SelM('${m}',event)`:'event.stopPropagation()'}" style="padding:6px;border-radius:6px;font-size:.77rem;text-align:center;cursor:${has?'pointer':'not-allowed'};border:1px solid ${sel?'var(--p4-gold)':'transparent'};background:${sel?'rgba(245,158,11,.18)':'transparent'};color:${sel?'var(--p4-gold)':has?'var(--text)':'rgba(100,116,139,.3)'};font-weight:${sel?700:400}">${m.slice(0,3)}</span>`;});
+  h+=`</div>`;document.getElementById('p4-pop').innerHTML=h;
+}
+function p4TglPop(e){e.stopPropagation();const p=document.getElementById('p4-pop');p.style.display=p.style.display==='block'?'none':'block';}
+function p4SelY(y,e){e.stopPropagation();p4SY=y;const av=p4AMY.filter(m=>m.year===y);if(!av.some(m=>m.month===p4SM))p4SM=av[av.length-1]?.month||p4SM;p4BuildPop();document.getElementById('p4-pop').style.display='block';p4UpdateMD();p4ApplyF();}
+function p4SelM(m,e){e.stopPropagation();p4SM=m;p4BuildPop();document.getElementById('p4-pop').style.display='none';p4UpdateMD();p4ApplyF();}
+function p4ShiftM(d){const i=p4AMY.findIndex(m=>m.month===p4SM&&m.year===p4SY);const ni=i+d;if(ni>=0&&ni<p4AMY.length){p4SM=p4AMY[ni].month;p4SY=p4AMY[ni].year;p4BuildPop();p4UpdateMD();p4ApplyF();}}
+function p4UpdateMD(){const el=document.getElementById('p4-md');if(el)el.childNodes[0].textContent=p4SM+' '+p4SY+' ';const i=p4AMY.findIndex(m=>m.month===p4SM&&m.year===p4SY);const pv=document.getElementById('p4-prev');const nx=document.getElementById('p4-next');if(pv)pv.disabled=i<=0;if(nx)nx.disabled=i>=p4AMY.length-1;}
+function p4ApplyF(){
+  p4UpdateMD();
+  const d5=RECORDS_5KW.filter(r=>r.month===p4SM&&r.year===p4SY);
+  const r10=window.RECORDS_10KW?RECORDS_10KW.find(r=>r.month===p4SM&&r.year===p4SY):null;
+  p4RenderMainTable(d5,r10);p4RenderPipeline();
+  if(p4CurTab==='5kw')p4RenderDetail5(d5);
+  else if(p4CurTab==='10kw')p4RenderDetail10();
+}
+function p4RenderMainTable(d5,r10){
+  const zones=[...new Set(RECORDS_5KW.map(r=>r.zone))].sort();
+  let gt_70=0,gt_ret=0,gt_10kw=0,rows='';
+  zones.forEach(z=>{
+    const zr=d5.find(r=>r.zone===z);
+    if(!zr){rows+=`<tr><td class="p4-zone-cell" style="color:var(--muted)">${z}</td><td colspan="5" style="text-align:center;color:var(--muted);font-size:.72rem">No data this month</td><td class="p4-total-cell">—</td></tr>`;return;}
+    const p70=zr.status_70==='PAID',p30=zr.status_30==='PAID',allPaid=p70&&p30;
+    const show70=p70?0:zr.amt_70||zr.basic;
+    const showRet=p30?0:zr.amt_30||zr.gst;
+    gt_70+=show70;gt_ret+=showRet;
+    const zclr=allPaid?'var(--p4-green)':!p70?'var(--p4-red)':'var(--p4-gold)';
+    rows+=`<tr class="${allPaid?'p4-paid-row':''}">
+      <td class="p4-zone-cell" style="color:${zclr}">${z}</td>
+      <td class="p4-amt-cell" style="color:${p70?'var(--muted)':'var(--p4-sky)'}">
+        ${show70>0?p4FmtFull(show70):p70?'<span style="color:var(--p4-green);font-size:.68rem">✅ Paid</span>':'—'}</td>
+      <td style="text-align:center">${p4Badge(zr.status_70)}</td>
+      <td class="p4-amt-cell" style="color:${p30?'var(--muted)':'var(--p4-gold)'}">
+        ${showRet>0?p4FmtFull(showRet):p30?'<span style="color:var(--p4-green);font-size:.68rem">✅ Paid</span>':'—'}</td>
+      <td class="p4-amt-cell" style="color:var(--muted)">—</td>
+      <td style="text-align:center">—</td>
+      <td class="p4-total-cell" style="color:${allPaid?'var(--muted)':'var(--purple)'}">
+        ${allPaid?'<span style="color:var(--p4-green);font-size:.68rem">✅ Clear</span>':p4FmtFull(zr.total)}</td>
+    </tr>`;
+  });
+  if(r10){
+    const amt10=r10.paid?0:r10.amount;gt_10kw=amt10;
+    rows+=`<tr style="border-top:2px solid rgba(245,158,11,.2);background:rgba(245,158,11,.03)">
+      <td class="p4-zone-cell" style="color:var(--p4-gold)">⚡ 10KW+</td>
+      <td class="p4-amt-cell" colspan="2" style="text-align:center;color:var(--muted);font-size:.7rem;font-style:italic">All zones combined</td>
+      <td class="p4-amt-cell" style="color:var(--muted)">—</td>
+      <td class="p4-amt-cell" style="color:${r10.paid?'var(--muted)':'var(--p4-gold)'}">
+        ${r10.paid?'<span style="color:var(--p4-green);font-size:.68rem">✅ Paid</span>':p4FmtFull(r10.amount)}</td>
+      <td style="text-align:center">${p4Badge(r10.status)}</td>
+      <td class="p4-total-cell" style="color:${r10.paid?'var(--muted)':'var(--p4-gold)'}">
+        ${r10.paid?'<span style="color:var(--p4-green);font-size:.68rem">✅ Clear</span>':p4FmtFull(r10.amount)}</td>
+    </tr>`;
+  }
+  document.getElementById('p4-main-tbody').innerHTML=rows;
+  const gtTotal=gt_70+gt_ret+gt_10kw;
+  document.getElementById('p4-main-tfoot').innerHTML=`<tr>
+    <td class="p4-zone-cell" style="color:var(--p4-gold)">GRAND TOTAL</td>
+    <td class="p4-amt-cell" style="color:var(--p4-sky)">${gt_70>0?p4FmtFull(gt_70):'—'}</td><td></td>
+    <td class="p4-amt-cell" style="color:var(--p4-gold)">${gt_ret>0?p4FmtFull(gt_ret):'—'}</td>
+    <td class="p4-amt-cell" style="color:var(--p4-gold)">${gt_10kw>0?p4FmtFull(gt_10kw):'—'}</td><td></td>
+    <td class="p4-total-cell">${gtTotal>0?p4FmtFull(gtTotal):'All Clear ✅'}</td>
+  </tr>`;
+  const pending=d5.filter(r=>r.status_30!=='PAID').length;
+  document.getElementById('p4-main-pc').textContent=`${p4SM} ${p4SY} · ${pending===0&&(!r10||r10.paid)?'All Clear ✅':`${pending} zones pending`}`;
+}
+function p4RenderPipeline(){
+  let rows='',pendMonths=0,totalPend=0;
+  [...p4AMY].reverse().forEach(({month,year})=>{
+    const d5=RECORDS_5KW.filter(r=>r.month===month&&r.year===year&&r.status_30!=='PAID');
+    const r10=window.RECORDS_10KW?RECORDS_10KW.find(r=>r.month===month&&r.year===year&&!r.paid):null;
+    if(!d5.length&&!r10)return;
+    pendMonths++;
+    const amt5=d5.reduce((s,r)=>s+r.total,0),amt10=r10?r10.amount:0;
+    totalPend+=amt5+amt10;
+    const isCur=month===p4SM&&year===p4SY;
+    const stages={};d5.forEach(r=>{const s=r.status_30||'';stages[s]=(stages[s]||0)+1;});
+    const pills=Object.entries(stages).map(([s,c])=>`<span class="p4-stage-cell ${p4SI(s).cls}" style="font-size:.63rem;margin:2px">${p4SI(s).label}<span style="background:rgba(0,0,0,.2);border-radius:2px;padding:0 4px;margin-left:3px">${c}</span></span>`).join('');
+    rows+=`<div class="p4-pipe-row${isCur?' p4-pipe-current':''}">
+      <div>
+        <div style="font-family:var(--fh);font-weight:700;font-size:.9rem;color:${isCur?'var(--p4-gold)':'var(--text)'}">${month.slice(0,3).toUpperCase()} ${year}${isCur?'<span style="font-size:.52rem;background:var(--p4-gold);color:#000;padding:1px 5px;border-radius:3px;margin-left:6px;vertical-align:middle">NOW</span>':''}</div>
+        <div style="font-family:var(--fh);font-size:.95rem;font-weight:700;color:var(--p4-red);margin-top:2px">${p4Fmt(amt5+amt10)}</div>
+        <div style="font-size:.6rem;color:var(--muted)">outstanding</div>
+      </div>
+      <div>
+        ${d5.length?`<div style="font-size:.6rem;color:var(--teal);font-weight:700;margin-bottom:3px">🔌 5KW — ${d5.length} zone${d5.length>1?'s':''} · ${p4Fmt(amt5)}</div>${pills}`:''}
+        ${r10?`<div style="margin-top:${d5.length?6:0}px;font-size:.6rem;color:var(--p4-gold);font-weight:700;margin-bottom:3px">⚡ 10KW — ${p4Fmt(r10.amount)}</div>${p4Badge(r10.status)}`:''}
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:4px;align-content:flex-start">
+        ${d5.map(r=>`<span style="font-size:.62rem;background:rgba(0,196,216,.07);border:1px solid rgba(0,196,216,.15);border-radius:4px;padding:2px 8px;white-space:nowrap"><span style="color:var(--teal)">${r.zone}</span>${r.total>0?` <span style="color:var(--p4-gold);font-family:var(--fm)">${p4Fmt(r.total)}</span>`:''}</span>`).join('')}
+      </div>
+    </div>`;
+  });
+  if(!rows){document.getElementById('p4-pipeline-body').innerHTML='<div class="no-data" style="padding:24px"><div class="no-ico">🎉</div>Sab payments clear!</div>';document.getElementById('p4-pipe-pc').textContent='All cleared ✅';return;}
+  document.getElementById('p4-pipe-pc').textContent=`${pendMonths} months pending · ${p4Fmt(totalPend)} outstanding`;
+  document.getElementById('p4-pipeline-body').innerHTML=rows;
+}
+function p4SwitchTab(t){
+  p4CurTab=t;
+  ['5kw','10kw','trend'].forEach(x=>{document.getElementById('p4tab-'+x).classList.toggle('active',x===t);const panel=document.getElementById('p4panel-'+x);if(panel)panel.style.display=x===t?'':'none';});
+  const d5=RECORDS_5KW.filter(r=>r.month===p4SM&&r.year===p4SY);
+  if(t==='5kw')p4RenderDetail5(d5);else if(t==='10kw')p4RenderDetail10();
+}
+function p4RenderDetail5(data){
+  document.getElementById('p4-5kw-pc').textContent=data.length+' zones · '+p4SM+' '+p4SY;
+  document.getElementById('p4tcnt-5kw').textContent=data.length;
+  const start=(p4Page5-1)*P4_PAGE,pg=data.slice(start,start+P4_PAGE);
+  document.getElementById('p4-5kw-tbody').innerHTML=pg.map(r=>`<tr>
+    <td style="font-weight:700;color:var(--p4-gold)">${r.zone}</td>
+    <td style="font-family:var(--fm);font-size:.75rem">${r.month.slice(0,3)} ${r.year}</td>
+    <td style="font-family:var(--fm);font-size:.72rem">${r.invoice||'—'}</td>
+    <td class="p4-amt-cell" style="color:var(--p4-sky)">${r.basic>0?p4FmtFull(r.basic):'—'}</td>
+    <td class="p4-amt-cell" style="color:var(--muted)">${r.gst>0?p4FmtFull(r.gst):'—'}</td>
+    <td class="p4-amt-cell" style="color:var(--p4-gold);font-weight:700">${r.total>0?p4FmtFull(r.total):'—'}</td>
+    <td style="text-align:center">${p4Badge(r.status_70)}</td>
+    <td class="p4-amt-cell">${r.amt_70>0?p4FmtFull(r.amt_70):'—'}</td>
+    <td style="text-align:center">${p4Badge(r.status_30)}</td>
+    <td class="p4-amt-cell">${r.amt_30>0?p4FmtFull(r.amt_30):'—'}</td>
+  </tr>`).join('');
+  const pages=Math.ceil(data.length/P4_PAGE);
+  let pgn=`<div class="pgn-in"><span class="pinfo">${start+1}–${Math.min(start+P4_PAGE,data.length)} of ${data.length}</span><div class="pbtns">`;
+  for(let i=1;i<=pages;i++)pgn+=`<button class="pb${p4Page5===i?' act':''}" onclick="p4Page5=${i};p4RenderDetail5(RECORDS_5KW.filter(r=>r.month===p4SM&&r.year===p4SY))">${i}</button>`;
+  document.getElementById('p4-5kw-pgn').innerHTML=pgn+`</div></div>`;
+}
+function p4RenderDetail10(){
+  if(!window.RECORDS_10KW){document.getElementById('p4-10kw-tbody').innerHTML='<tr><td colspan="4" class="no-data">No 10KW data</td></tr>';return;}
+  document.getElementById('p4tcnt-10kw').textContent=RECORDS_10KW.length;
+  document.getElementById('p4-10kw-pc').textContent=RECORDS_10KW.length+' months';
+  const sorted=[...RECORDS_10KW].sort((a,b)=>{const d=parseInt(b.year)-parseInt(a.year);return d||P4M.indexOf(b.month)-P4M.indexOf(a.month);});
+  document.getElementById('p4-10kw-tbody').innerHTML=sorted.map(r=>`<tr style="${!r.paid?'background:rgba(245,158,11,.04)':''}">
+    <td style="font-family:var(--fh);font-weight:700;color:${r.paid?'var(--muted)':'var(--p4-gold)'}">${r.month.slice(0,3).toUpperCase()} ${r.year}</td>
+    <td class="p4-amt-cell" style="color:${r.paid?'var(--muted)':'var(--p4-gold)'}">
+      ${r.paid?`<span style="text-decoration:line-through;opacity:.45">${p4FmtFull(r.amount)}</span>`:p4FmtFull(r.amount)}</td>
+    <td style="text-align:center">${p4Badge(r.status)}</td>
+    <td style="text-align:center;font-size:.72rem;color:var(--muted)">${r.paid?'✅ Done':'⏳ Pending'}</td>
+  </tr>`).join('');
+}
+function p4RenderTrend(){
+  if(!window.RECORDS_5KW||!RECORDS_5KW.length)return;
+  const zones=[...new Set(RECORDS_5KW.map(r=>r.zone))].sort(),months=p4AMY;
+  let hd=`<tr><th style="text-align:left;position:sticky;left:0;background:var(--p4-surf);min-width:90px;font-size:.75rem">Zone</th>`;
+  months.forEach(m=>hd+=`<th style="white-space:nowrap;text-align:center;font-size:.68rem;padding:6px 8px">${m.month.slice(0,3)}<br><span style="font-weight:400;color:var(--muted)">${m.year.slice(2)}</span></th>`);
+  hd+=`</tr>`;document.getElementById('p4-trend-head').innerHTML=hd;
+  let bd='';
+  zones.forEach(z=>{
+    bd+=`<tr><td style="position:sticky;left:0;background:var(--p4-surf2);font-weight:700;font-size:.78rem;color:var(--p4-gold);padding:6px 10px">${z}</td>`;
+    months.forEach(m=>{const rec=RECORDS_5KW.find(r=>r.zone===z&&r.month===m.month&&r.year===m.year);if(!rec){bd+=`<td style="color:rgba(100,100,100,.3);font-size:.6rem;text-align:center">—</td>`;return;}const si=p4SI(rec.status_30);bd+=`<td style="text-align:center;padding:4px"><span class="p4-stage-cell ${si.cls}" style="font-size:.57rem;padding:2px 4px;display:block">${si.label}</span></td>`;});
+    bd+=`</tr>`;
+  });
+  if(window.RECORDS_10KW&&RECORDS_10KW.length){
+    bd+=`<tr style="border-top:2px solid rgba(245,158,11,.25)"><td style="position:sticky;left:0;background:var(--p4-surf2);font-weight:700;font-size:.78rem;color:var(--p4-gold);padding:6px 10px">⚡ 10KW+</td>`;
+    months.forEach(m=>{const rec=RECORDS_10KW.find(r=>r.month===m.month&&r.year===m.year);if(!rec){bd+=`<td style="color:rgba(100,100,100,.3);font-size:.6rem;text-align:center">—</td>`;return;}const si=p4SI(rec.status);bd+=`<td style="text-align:center;padding:4px"><span class="p4-stage-cell ${si.cls}" style="font-size:.57rem;padding:2px 4px;display:block">${si.label}</span></td>`;});
+    bd+=`</tr>`;
+  }
+  document.getElementById('p4-trend-body').innerHTML=bd;
+  const maxAmt=Math.max(...months.map(m=>RECORDS_5KW.filter(r=>r.month===m.month&&r.year===m.year).reduce((s,r)=>s+r.total,0)));
+  let bars=`<div style="display:flex;align-items:flex-end;gap:4px;min-width:${months.length*42}px;height:80px;padding-top:10px">`;
+  months.forEach(m=>{const amt=RECORDS_5KW.filter(r=>r.month===m.month&&r.year===m.year).reduce((s,r)=>s+r.total,0);const allPaid=RECORDS_5KW.filter(r=>r.month===m.month&&r.year===m.year).every(r=>r.status_30==='PAID');const r10=window.RECORDS_10KW?RECORDS_10KW.find(r=>r.month===m.month&&r.year===m.year):null;const bothPaid=allPaid&&(!r10||r10.paid);const isSel=m.month===p4SM&&m.year===p4SY;const pct=maxAmt>0?Math.round(amt/maxAmt*100):0;const clr=bothPaid?'var(--p4-green)':isSel?'var(--p4-gold)':'var(--teal)';bars+=`<div style="flex:1;min-width:28px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer" onclick="p4SelM('${m.month}',{stopPropagation:()=>{}});p4SelY('${m.year}',{stopPropagation:()=>{}})"><div style="font-size:.52rem;color:var(--muted);white-space:nowrap">${p4Fmt(amt)}</div><div style="width:100%;height:${Math.max(pct*0.55,4)}px;background:${clr};border-radius:2px 2px 0 0;opacity:${isSel?1:.65}"></div><div style="font-size:.5rem;color:${isSel?'var(--p4-gold)':'var(--muted)'};text-align:center;font-weight:${isSel?700:400}">${m.month.slice(0,3)}<br>${m.year.slice(2)}</div></div>`;});
+  bars+=`</div><div style="font-size:.62rem;color:var(--muted);margin-top:6px">🟢 Both paid &nbsp;|&nbsp; 🟡 Current &nbsp;|&nbsp; 🔵 Others</div>`;
+  document.getElementById('p4-amt-trend').innerHTML=bars;
+}
+function p4Reset(){p4ApplyF();}
+function p4Export(){
+  const d5=RECORDS_5KW.filter(r=>r.month===p4SM&&r.year===p4SY);
+  const rows=[['Zone','Month','Year','Invoice','Basic','GST','Total','70% Stage','70% Amt','30% Stage','30% Amt']];
+  d5.forEach(r=>rows.push([r.zone,r.month,r.year,r.invoice,r.basic,r.gst,r.total,r.status_70,r.amt_70,r.status_30,r.amt_30]));
+  const r10=window.RECORDS_10KW?RECORDS_10KW.find(r=>r.month===p4SM&&r.year===p4SY):null;
+  if(r10)rows.push(['10KW-ALL','','','','','',r10.amount,r10.status,'','','']);
+  const csv=rows.map(r=>r.map(v=>`"${v||''}"`).join(',')).join('\n');
+  const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(csv);a.download=`MRI_Financial_${p4SM}_${p4SY}.csv`;a.click();
+}
+const _p4OS=window.switchProj;
+window.switchProj=function(id){_p4OS&&_p4OS(id);if(id==='p4'&&!p4AMY.length)p4Init();};
+
+
 </script>
 <script>
 __DATA_PLACEHOLDER__
