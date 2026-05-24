@@ -1082,6 +1082,23 @@ function doExport(){
   const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(csv);a.download=`DVVNL_10KW_${selMonth}_${selYear}.csv`;a.click();
 }
 
+var MONTHS_ARR=["January","February","March","April","May","June","July","August","September","October","November","December"];
+var ST5={
+  "PAID":{c:"#4caf50",bg:"rgba(76,175,80,.13)",br:"rgba(76,175,80,.35)",lb:"PAID"},
+  "ERP":{c:"#00acc1",bg:"rgba(0,172,193,.13)",br:"rgba(0,172,193,.35)",lb:"ERP ✓"},
+  "SUBMIT TO HV CELL":{c:"#42a5f5",bg:"rgba(66,165,245,.13)",br:"rgba(66,165,245,.35)",lb:"HV Cell"},
+  "ANNEXURE SUBMIT TO ZONE":{c:"#80deea",bg:"rgba(128,222,234,.13)",br:"rgba(128,222,234,.35)",lb:"Ann/Zone"},
+  "CPC":{c:"#ffab40",bg:"rgba(255,171,64,.13)",br:"rgba(255,171,64,.35)",lb:"CPC"},
+  "UNDER VERIFICATION":{c:"#ff7043",bg:"rgba(255,112,67,.13)",br:"rgba(255,112,67,.35)",lb:"U/Verif."},
+  "":{c:"#3a5a7a",bg:"rgba(58,90,122,.07)",br:"rgba(58,90,122,.18)",lb:"—"}
+};
+function p2Paid(r){return r.status_30==="PAID";}
+function p2Badge(s,big){
+  var st=ST5[s]||ST5[""];
+  var sz=big?".78rem":".65rem";
+  var pd=big?"4px 11px":"2px 7px";
+  return "<span style=\"display:inline-flex;align-items:center;gap:4px;padding:"+pd+";border-radius:20px;font-size:"+sz+";font-weight:700;background:"+st.bg+";color:"+st.c+";border:1px solid "+st.br+";white-space:nowrap\"><span style=\"width:5px;height:5px;border-radius:50%;background:currentColor\"></span>"+st.lb+"</span>";
+}
 var p2SM="",p2SY="",p2AMY=[],p2Data=[],p2All=[];
 function p2Init(){
   var seen={};
