@@ -164,6 +164,12 @@ for row in ws5.iter_rows(min_row=3, values_only=True):
     if not z: continue
     if not isinstance(row[5], datetime): continue
     dt = row[5]
+    s30 = str(row[16] or '').strip()
+    # 30% amount rule:
+    # Under Verification / Re-Verification / Annexure → col[17] (basic 30%)
+    # Submit to HV Cell / ERP / CPC / Paid           → col[18] (actual 30% after verification)
+    _upper = s30.upper()
+    _use_actual = any(x in _upper for x in ['SUBMIT TO HV','ERP','CPC','PAID'])
     RECORDS_5KW.append({
         'zone':      z,
         'month':     MONTHS[dt.month - 1],
@@ -174,8 +180,8 @@ for row in ws5.iter_rows(min_row=3, values_only=True):
         'total':     sf(row[13]),
         'status_70': str(row[14] or '').strip(),
         'amt_70':    sf(row[15]),
-        'status_30': str(row[16] or '').strip(),
-        'amt_30':    sf(row[17]),
+        'status_30': s30,
+        'amt_30':    sf(row[18]) if _use_actual else sf(row[17]),
         'penalty':   sf(row[19]),
         'from_zone': str(row[20] or '').strip(),
         'submit':    str(row[21] or '').strip(),

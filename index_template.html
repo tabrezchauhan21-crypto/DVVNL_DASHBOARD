@@ -760,33 +760,13 @@ tr:last-child td{border-bottom:none}
         </div>
       </div>
 
-      <!-- MAIN: DVVNL Payment Status Table -->
+      <!-- MAIN: DVVNL Payment Pipeline Summary -->
       <div class="panel" style="border-radius:11px;margin-bottom:14px">
         <div class="ph">
           <span class="pt" style="color:var(--p4-gold)">💰 DVVNL PAYMENT STATUS — MRI PROJECT</span>
-          <span class="pc" id="p4-main-pc">–</span>
+          <span class="pc" id="p4-main-pc">Stage-wise outstanding amount</span>
         </div>
-        <div class="twrap" style="padding:0">
-          <table class="p4-main-tbl">
-            <thead>
-              <tr>
-                <th rowspan="2" style="text-align:left;min-width:100px;position:sticky;left:0;background:var(--p4-surf)">ZONE</th>
-                <th colspan="3" class="p4-th-5kw">🔌 5KW – 9KW</th>
-                <th colspan="2" class="p4-th-10kw">⚡ 10KW+</th>
-                <th rowspan="2" class="p4-th-total">TOTAL OUTSTANDING</th>
-              </tr>
-              <tr>
-                <th class="p4-th-5kw" style="font-size:.7rem">70% Amount</th>
-                <th class="p4-th-5kw" style="font-size:.7rem">Stage</th>
-                <th class="p4-th-5kw" style="font-size:.7rem">30% Retention</th>
-                <th class="p4-th-10kw" style="font-size:.7rem">Amount</th>
-                <th class="p4-th-10kw" style="font-size:.7rem">Stage</th>
-              </tr>
-            </thead>
-            <tbody id="p4-main-tbody"></tbody>
-            <tfoot id="p4-main-tfoot"></tfoot>
-          </table>
-        </div>
+        <div id="p4-pipeline-summary" style="padding:16px"></div>
       </div>
 
       <!-- PENDING PIPELINE -->
@@ -1106,183 +1086,7 @@ function doExport(){
 }
 
 
-// ═══ 5KW-9KW ═══
-var RECORDS_5KW=[{"zone":"AGRA","month":"March","year":"2026","miro":"5100147979","invoice":"893/2025-26/UP","basic":427095.15,"gst":76877.13,"total":503972.28,"status_70":"SUBMIT TO HV CELL","status_30":"UNDER VERIFICATION","from_zone":"","submit":""},{"zone":"ALIGARH","month":"March","year":"2026","miro":"5100147982","invoice":"894/2025-26/UP","basic":2315883.65,"gst":416859.06,"total":2732742.71,"status_70":"SUBMIT TO HV CELL","status_30":"UNDER VERIFICATION","from_zone":"","submit":""},{"zone":"BANDA","month":"March","year":"2026","miro":"5100147985","invoice":"895/2025-26/UP","basic":395871.3,"gst":71256.83,"total":467128.13,"status_70":"SUBMIT TO HV CELL","status_30":"UNDER VERIFICATION","from_zone":"","submit":""},{"zone":"ETAH","month":"March","year":"2026","miro":"5100147987","invoice":"896/2025-26/UP","basic":619120.35,"gst":111441.66,"total":730562.01,"status_70":"SUBMIT TO HV CELL","status_30":"UNDER VERIFICATION","from_zone":"","submit":""},{"zone":"FIROZABAD","month":"March","year":"2026","miro":"5100147992","invoice":"897/2025-26/UP","basic":688897.25,"gst":124001.51,"total":812898.76,"status_70":"SUBMIT TO HV CELL","status_30":"UNDER VERIFICATION","from_zone":"","submit":""},{"zone":"JHANSI","month":"March","year":"2026","miro":"5100147993","invoice":"898/2025-26/UP","basic":907909.2,"gst":163423.66,"total":1071332.86,"status_70":"SUBMIT TO HV CELL","status_30":"UNDER VERIFICATION","from_zone":"","submit":""},{"zone":"KANPUR-1","month":"March","year":"2026","miro":"5100147996","invoice":"899/2025-26/UP","basic":197356.75,"gst":35524.22,"total":232880.97,"status_70":"SUBMIT TO HV CELL","status_30":"UNDER VERIFICATION","from_zone":"","submit":""},{"zone":"KANPUR-2","month":"March","year":"2026","miro":"5100147999","invoice":"900/2025-26/UP","basic":725510.05,"gst":130591.81,"total":856101.86,"status_70":"SUBMIT TO HV CELL","status_30":"UNDER VERIFICATION","from_zone":"","submit":""},{"zone":"MATHURA","month":"March","year":"2026","miro":"5100148001","invoice":"901/2025-26/UP","basic":899942.05,"gst":161989.57,"total":1061931.62,"status_70":"SUBMIT TO HV CELL","status_30":"UNDER VERIFICATION","from_zone":"","submit":""},{"zone":"AGRA","month":"February","year":"2026","miro":"5100147979","invoice":"893/2025-26/UP","basic":429243.7,"gst":77263.87,"total":506507.57,"status_70":"PAID","status_30":"UNDER VERIFICATION","from_zone":"","submit":""},{"zone":"ALIGARH","month":"February","year":"2026","miro":"5100147982","invoice":"894/2025-26/UP","basic":2327576.5,"gst":418963.77,"total":2746540.27,"status_70":"PAID","status_30":"UNDER VERIFICATION","from_zone":"","submit":""},{"zone":"BANDA","month":"February","year":"2026","miro":"5100147985","invoice":"895/2025-26/UP","basic":403304.1,"gst":72594.74,"total":475898.84,"status_70":"PAID","status_30":"UNDER VERIFICATION","from_zone":"","submit":""},{"zone":"ETAH","month":"February","year":"2026","miro":"5100147987","invoice":"896/2025-26/UP","basic":621616.9,"gst":111891.04,"total":733507.94,"status_70":"PAID","status_30":"UNDER VERIFICATION","from_zone":"","submit":""},{"zone":"FIROZABAD","month":"February","year":"2026","miro":"5100147992","invoice":"897/2025-26/UP","basic":705317.4,"gst":126957.13,"total":832274.53,"status_70":"PAID","status_30":"UNDER VERIFICATION","from_zone":"","submit":""},{"zone":"JHANSI","month":"February","year":"2026","miro":"5100147993","invoice":"898/2025-26/UP","basic":926682.05,"gst":166802.77,"total":1093484.82,"status_70":"PAID","status_30":"UNDER VERIFICATION","from_zone":"","submit":""},{"zone":"KANPUR-1","month":"February","year":"2026","miro":"5100147996","invoice":"899/2025-26/UP","basic":203782.65,"gst":36680.88,"total":240463.53,"status_70":"PAID","status_30":"UNDER VERIFICATION","from_zone":"","submit":""},{"zone":"KANPUR-2","month":"February","year":"2026","miro":"5100147999","invoice":"900/2025-26/UP","basic":749740.75,"gst":134953.33,"total":884694.08,"status_70":"PAID","status_30":"UNDER VERIFICATION","from_zone":"","submit":""},{"zone":"MATHURA","month":"February","year":"2026","miro":"5100148001","invoice":"901/2025-26/UP","basic":908116.6,"gst":163460.99,"total":1071577.59,"status_70":"PAID","status_30":"UNDER VERIFICATION","from_zone":"","submit":""},{"zone":"AGRA","month":"January","year":"2026","miro":"5100147954","invoice":"818/2025-26/UP","basic":442484.25,"gst":79647.16,"total":522131.41,"status_70":"PAID","status_30":"UNDER VERIFICATION","from_zone":"","submit":""},{"zone":"ALIGARH","month":"January","year":"2026","miro":"5100147958","invoice":"819/2025-26/UP","basic":2359270.0,"gst":424668.6,"total":2783938.6,"status_70":"PAID","status_30":"UNDER VERIFICATION","from_zone":"","submit":""},{"zone":"BANDA","month":"January","year":"2026","miro":"5100147959","invoice":"820/2025-26/UP","basic":407877.95,"gst":73418.03,"total":481295.98,"status_70":"PAID","status_30":"UNDER VERIFICATION","from_zone":"","submit":""},{"zone":"ETAH","month":"January","year":"2026","miro":"5100147961","invoice":"821/2025-26/UP","basic":661791.35,"gst":119122.44,"total":780913.79,"status_70":"PAID","status_30":"UNDER VERIFICATION","from_zone":"","submit":""},{"zone":"FIROZABAD","month":"January","year":"2026","miro":"5100147962","invoice":"822/2025-26/UP","basic":714335.35,"gst":128580.36,"total":842915.71,"status_70":"PAID","status_30":"UNDER VERIFICATION","from_zone":"","submit":""},{"zone":"JHANSI","month":"January","year":"2026","miro":"5100147965","invoice":"823/2025-26/UP","basic":933382.25,"gst":168008.8,"total":1101391.05,"status_70":"PAID","status_30":"UNDER VERIFICATION","from_zone":"","submit":""},{"zone":"KANPUR-1","month":"January","year":"2026","miro":"5100147967","invoice":"824/2025-26/UP","basic":205432.85,"gst":36977.91,"total":242410.76,"status_70":"PAID","status_30":"SUBMIT TO HV CELL","from_zone":"22.04.2026","submit":"Y"},{"zone":"KANPUR-2","month":"January","year":"2026","miro":"5100147970","invoice":"825/2025-26/UP","basic":766124.75,"gst":137902.45,"total":904027.2,"status_70":"PAID","status_30":"SUBMIT TO HV CELL","from_zone":"30.03.2026","submit":"Y"},{"zone":"MATHURA","month":"January","year":"2026","miro":"5100147972","invoice":"826/2025-26/UP","basic":927919.25,"gst":167025.46,"total":1094944.72,"status_70":"PAID","status_30":"UNDER VERIFICATION","from_zone":"01.04.2026","submit":"Y"},{"zone":"AGRA","month":"December","year":"2025","miro":"","invoice":"768/2025-26/UP","basic":443833.75,"gst":79890.07,"total":523723.83,"status_70":"PAID","status_30":"UNDER VERIFICATION","from_zone":"","submit":""},{"zone":"ALIGARH","month":"December","year":"2025","miro":"","invoice":"769/2025-26/UP","basic":2396888.55,"gst":431439.94,"total":2828328.49,"status_70":"PAID","status_30":"SUBMIT TO HV CELL","from_zone":"23.02.2026","submit":"Y"},{"zone":"BANDA","month":"December","year":"2025","miro":"","invoice":"770/2025-26/UP","basic":417716.8,"gst":75189.02,"total":492905.82,"status_70":"PAID","status_30":"SUBMIT TO HV CELL","from_zone":"","submit":""},{"zone":"ETAH","month":"December","year":"2025","miro":"","invoice":"771/2025-26/UP","basic":694170.0,"gst":124950.6,"total":819120.6,"status_70":"PAID","status_30":"SUBMIT TO HV CELL","from_zone":"03.04.2026","submit":"y"},{"zone":"FIROZABAD","month":"December","year":"2025","miro":"","invoice":"772/2025-26/UP","basic":717827.3,"gst":129208.91,"total":847036.21,"status_70":"PAID","status_30":"UNDER VERIFICATION","from_zone":"","submit":""},{"zone":"JHANSI","month":"December","year":"2025","miro":"","invoice":"773/2025-26/UP","basic":942717.05,"gst":169689.07,"total":1112406.12,"status_70":"PAID","status_30":"UNDER VERIFICATION","from_zone":"","submit":""},{"zone":"KANPUR-1","month":"December","year":"2025","miro":"","invoice":"774/2025-26/UP","basic":210201.35,"gst":37836.24,"total":248037.59,"status_70":"PAID","status_30":"SUBMIT TO HV CELL","from_zone":"22.04.2026","submit":"y"},{"zone":"KANPUR-2","month":"December","year":"2025","miro":"","invoice":"775/2025-26/UP","basic":783641.4,"gst":141055.45,"total":924696.85,"status_70":"PAID","status_30":"SUBMIT TO HV CELL","from_zone":"30.03.2026","submit":"Y"},{"zone":"MATHURA","month":"December","year":"2025","miro":"","invoice":"776/2025-26/UP","basic":952403.0,"gst":171432.54,"total":1123835.54,"status_70":"PAID","status_30":"SUBMIT TO HV CELL","from_zone":"07.03.2026","submit":"Y"},{"zone":"AGRA","month":"November","year":"2025","miro":"","invoice":"705/2025-26/UP","basic":441180.7,"gst":79412.53,"total":520593.23,"status_70":"PAID","status_30":"ANNEXURE SUBMIT TO ZONE","from_zone":"","submit":""},{"zone":"ALIGARH","month":"November","year":"2025","miro":"","invoice":"706/2025-26/UP","basic":2719379.55,"gst":489488.32,"total":3208867.87,"status_70":"PAID","status_30":"SUBMIT TO HV CELL","from_zone":"23.02.2026","submit":"Y"},{"zone":"BANDA","month":"November","year":"2025","miro":"","invoice":"707/2025-26/UP","basic":412168.1,"gst":74190.26,"total":486358.36,"status_70":"PAID","status_30":"SUBMIT TO HV CELL","from_zone":"","submit":""},{"zone":"ETAH","month":"November","year":"2025","miro":"","invoice":"708/2025-26/UP","basic":721214.2,"gst":129818.56,"total":851032.76,"status_70":"PAID","status_30":"SUBMIT TO HV CELL","from_zone":"23.02.2026","submit":"Y"},{"zone":"FIROZABAD","month":"November","year":"2025","miro":"","invoice":"709/2025-26/UP","basic":753449.45,"gst":135620.9,"total":889070.35,"status_70":"PAID","status_30":"ANNEXURE SUBMIT TO ZONE","from_zone":"","submit":""},{"zone":"JHANSI","month":"November","year":"2025","miro":"","invoice":"710/2025-26/UP","basic":1018429.15,"gst":183317.25,"total":1201746.4,"status_70":"PAID","status_30":"ANNEXURE SUBMIT TO ZONE","from_zone":"","submit":""},{"zone":"KANPUR-1","month":"November","year":"2025","miro":"","invoice":"711/2025-26/UP","basic":210365.0,"gst":37865.7,"total":248230.7,"status_70":"PAID","status_30":"SUBMIT TO HV CELL","from_zone":"22.04.2026","submit":"y"},{"zone":"KANPUR-2","month":"November","year":"2025","miro":"","invoice":"712/2025-26/UP","basic":791553.15,"gst":142479.57,"total":934032.72,"status_70":"PAID","status_30":"SUBMIT TO HV CELL","from_zone":"11.03.2026","submit":"Y"},{"zone":"MATHURA","month":"November","year":"2025","miro":"","invoice":"713/2025-26/UP","basic":1067507.4,"gst":192151.33,"total":1259658.73,"status_70":"PAID","status_30":"SUBMIT TO HV CELL","from_zone":"","submit":""},{"zone":"AGRA","month":"October","year":"2025","miro":"5100103898","invoice":"613/2025-26/UP","basic":457373.0,"gst":82327.14,"total":539700.14,"status_70":"PAID","status_30":"ANNEXURE SUBMIT TO ZONE","from_zone":"","submit":""},{"zone":"ALIGARH","month":"October","year":"2025","miro":"5100103901","invoice":"614/2025-26/UP","basic":2756541.65,"gst":496177.5,"total":3252719.15,"status_70":"PAID","status_30":"SUBMIT TO HV CELL","from_zone":"","submit":""},{"zone":"BANDA","month":"October","year":"2025","miro":"","invoice":"615/2025-26/UP","basic":428353.15,"gst":77103.57,"total":505456.72,"status_70":"PAID","status_30":"SUBMIT TO HV CELL","from_zone":"","submit":""},{"zone":"ETAH","month":"October","year":"2025","miro":"5100103909","invoice":"616/2025-26/UP","basic":743559.9,"gst":133840.78,"total":877400.68,"status_70":"PAID","status_30":"SUBMIT TO HV CELL","from_zone":"","submit":""},{"zone":"FIROZABAD","month":"October","year":"2025","miro":"5100103911","invoice":"617/2025-26/UP","basic":792579.0,"gst":142664.22,"total":935243.22,"status_70":"PAID","status_30":"ANNEXURE SUBMIT TO ZONE","from_zone":"","submit":""},{"zone":"JHANSI","month":"October","year":"2025","miro":"5100103913","invoice":"618/2025-26/UP","basic":1072871.9,"gst":193116.94,"total":1265988.84,"status_70":"PAID","status_30":"ANNEXURE SUBMIT TO ZONE","from_zone":"","submit":""},{"zone":"KANPUR-1","month":"October","year":"2025","miro":"5100103918","invoice":"619/2025-26/UP","basic":211551.15,"gst":38079.21,"total":249630.36,"status_70":"PAID","status_30":"SUBMIT TO HV CELL","from_zone":"","submit":""},{"zone":"KANPUR-2","month":"October","year":"2025","miro":"5100103920","invoice":"620/2025-26/UP","basic":813145.45,"gst":146366.18,"total":959511.63,"status_70":"PAID","status_30":"SUBMIT TO HV CELL","from_zone":"","submit":""},{"zone":"MATHURA","month":"October","year":"2025","miro":"5100103923","invoice":"621/2025-26/UP","basic":1085114.85,"gst":195320.67,"total":1280435.52,"status_70":"PAID","status_30":"SUBMIT TO HV CELL","from_zone":"","submit":""},{"zone":"AGRA","month":"September","year":"2025","miro":"51000103767","invoice":"544/2025-26/UP","basic":451900.25,"gst":81342.04,"total":533242.3,"status_70":"PAID","status_30":"ANNEXURE SUBMIT TO ZONE","from_zone":"","submit":""},{"zone":"ALIGARH","month":"September","year":"2025","miro":"51000103773","invoice":"545/2025-26/UP","basic":2768096.0,"gst":498257.28,"total":3266353.28,"status_70":"PAID","status_30":"CPC","from_zone":"","submit":""},{"zone":"BANDA","month":"September","year":"2025","miro":"51000103779","invoice":"546/2025-26/UP","basic":420741.65,"gst":75733.5,"total":496475.15,"status_70":"PAID","status_30":"SUBMIT TO HV CELL","from_zone":"","submit":""},{"zone":"ETAH","month":"September","year":"2025","miro":"51000103780","invoice":"547/2025-26/UP","basic":772261.9,"gst":139007.14,"total":911269.04,"status_70":"PAID","status_30":"CPC","from_zone":"","submit":""},{"zone":"FIROZABAD","month":"September","year":"2025","miro":"51000103781","invoice":"548/2025-26/UP","basic":787555.75,"gst":141760.04,"total":929315.79,"status_70":"PAID","status_30":"SUBMIT TO HV CELL","from_zone":"05.03.2026","submit":"Y"},{"zone":"JHANSI","month":"September","year":"2025","miro":"51000103783","invoice":"549/2025-26/UP","basic":1047611.1,"gst":188570.0,"total":1236181.1,"status_70":"PAID","status_30":"ANNEXURE SUBMIT TO ZONE","from_zone":"","submit":""},{"zone":"KANPUR-1","month":"September","year":"2025","miro":"51000103874","invoice":"550/2025-26/UP","basic":214742.25,"gst":38653.61,"total":253395.86,"status_70":"PAID","status_30":"CPC","from_zone":"","submit":""},{"zone":"KANPUR-2","month":"September","year":"2025","miro":"51000103876","invoice":"551/2025-26/UP","basic":830983.8,"gst":149577.08,"total":980560.88,"status_70":"PAID","status_30":"CPC","from_zone":"","submit":""},{"zone":"MATHURA","month":"September","year":"2025","miro":"51000103879","invoice":"552/2025-26/UP","basic":1076020.85,"gst":193683.75,"total":1269704.6,"status_70":"PAID","status_30":"CPC","from_zone":"","submit":""},{"zone":"AGRA","month":"August","year":"2025","miro":"5100078426","invoice":"459/2025-26/UP","basic":461504.35,"gst":83070.78,"total":544575.13,"status_70":"PAID","status_30":"ANNEXURE SUBMIT TO ZONE","from_zone":"","submit":""},{"zone":"ALIGARH","month":"August","year":"2025","miro":"","invoice":"460/2025-26/UP","basic":2824565.2,"gst":508421.74,"total":3332986.94,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"BANDA","month":"August","year":"2025","miro":"5100078455","invoice":"461/2025-26/UP","basic":430358.35,"gst":77464.5,"total":507822.85,"status_70":"PAID","status_30":"SUBMIT TO HV CELL","from_zone":"","submit":""},{"zone":"ETAH","month":"August","year":"2025","miro":"5100078468","invoice":"462/2025-26/UP","basic":842565.8,"gst":151661.84,"total":994227.64,"status_70":"PAID","status_30":"CPC","from_zone":"","submit":""},{"zone":"FIROZABAD","month":"August","year":"2025","miro":"5100078488","invoice":"463/2025-26/UP","basic":815259.9,"gst":146746.78,"total":962006.68,"status_70":"PAID","status_30":"SUBMIT TO HV CELL","from_zone":"05.03.2026","submit":"Y"},{"zone":"JHANSI","month":"August","year":"2025","miro":"510078500","invoice":"464/2025-26/UP","basic":1069847.15,"gst":192572.49,"total":1262419.64,"status_70":"PAID","status_30":"SUBMIT TO HV CELL","from_zone":"22.04.2026","submit":"y"},{"zone":"KANPUR-1","month":"August","year":"2025","miro":"","invoice":"465/2025-26/UP","basic":212560.15,"gst":38260.83,"total":250820.98,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"KANPUR-2","month":"August","year":"2025","miro":"","invoice":"466/2025-26/UP","basic":848743.1,"gst":152773.76,"total":1001516.86,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"MATHURA","month":"August","year":"2025","miro":"5100078516","invoice":"467/2025-26/UP","basic":1102470.2,"gst":198444.64,"total":1300914.84,"status_70":"PAID","status_30":"CPC","from_zone":"","submit":""},{"zone":"AGRA","month":"July","year":"2025","miro":"5100075534","invoice":"379/2025-26/UP","basic":468638.85,"gst":84354.99,"total":552993.84,"status_70":"PAID","status_30":"ANNEXURE SUBMIT TO ZONE","from_zone":"","submit":""},{"zone":"ALIGARH","month":"July","year":"2025","miro":"","invoice":"380/2025-26/UP","basic":2822493.35,"gst":508048.8,"total":3330542.15,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"BANDA","month":"July","year":"2025","miro":"5100075620","invoice":"381/2025-26/UP","basic":445017.9,"gst":80103.22,"total":525121.12,"status_70":"PAID","status_30":"SUBMIT TO HV CELL","from_zone":"","submit":""},{"zone":"ETAH","month":"July","year":"2025","miro":"5100075603","invoice":"382/2025-26/UP","basic":865113.35,"gst":155720.4,"total":1020833.75,"status_70":"PAID","status_30":"CPC","from_zone":"","submit":""},{"zone":"FIROZABAD","month":"July","year":"2025","miro":"5100075609","invoice":"383/2025-26/UP","basic":831678.65,"gst":149702.16,"total":981380.81,"status_70":"PAID","status_30":"SUBMIT TO HV CELL","from_zone":"05.03.2026","submit":"Y"},{"zone":"JHANSI","month":"July","year":"2025","miro":"5100075626","invoice":"384/2025-26/UP","basic":1072767.2,"gst":193098.1,"total":1265865.3,"status_70":"PAID","status_30":"SUBMIT TO HV CELL","from_zone":"22.04.2026","submit":"y"},{"zone":"KANPUR-1","month":"July","year":"2025","miro":"","invoice":"385/2025-26/UP","basic":214651.2,"gst":38637.22,"total":253288.42,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"KANPUR-2","month":"July","year":"2025","miro":"","invoice":"386/2025-26/UP","basic":865391.9,"gst":155770.54,"total":1021162.44,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"MATHURA","month":"July","year":"2025","miro":"5100075615","invoice":"387/2025-26/UP","basic":1116847.05,"gst":201032.47,"total":1317879.52,"status_70":"PAID","status_30":"CPC","from_zone":"","submit":""},{"zone":"AGRA","month":"June","year":"2025","miro":"5100057891","invoice":"300/2025-26/UP","basic":474966.25,"gst":85493.93,"total":560460.18,"status_70":"PAID","status_30":"ANNEXURE SUBMIT TO ZONE","from_zone":"","submit":""},{"zone":"ALIGARH","month":"June","year":"2025","miro":"","invoice":"301/2025-26/UP","basic":2827018.6,"gst":508863.35,"total":3335881.95,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"BANDA","month":"June","year":"2025","miro":"","invoice":"302/2025-26/UP","basic":454692.25,"gst":81844.6,"total":536536.85,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"ETAH","month":"June","year":"2025","miro":"","invoice":"303/2025-26/UP","basic":867911.9,"gst":156224.14,"total":1024136.04,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"FIROZABAD","month":"June","year":"2025","miro":"5100057726","invoice":"304/2025-26/UP","basic":839800.2,"gst":151164.04,"total":990964.24,"status_70":"PAID","status_30":"SUBMIT TO HV CELL","from_zone":"05.03.2026","submit":"Y"},{"zone":"JHANSI","month":"June","year":"2025","miro":"5100057728","invoice":"305/2025-26/UP","basic":1072778.95,"gst":193100.21,"total":1265879.16,"status_70":"PAID","status_30":"SUBMIT TO HV CELL","from_zone":"22.04.2026","submit":"y"},{"zone":"KANPUR-1","month":"June","year":"2025","miro":"","invoice":"306/2025-26/UP","basic":213469.75,"gst":38424.56,"total":251894.3,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"KANPUR-2","month":"June","year":"2025","miro":"","invoice":"307/2025-26/UP","basic":876156.45,"gst":157708.16,"total":1033864.61,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"MATHURA","month":"June","year":"2025","miro":"","invoice":"308/2025-26/UP","basic":1122538.7,"gst":202056.97,"total":1324595.67,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"AGRA","month":"May","year":"2025","miro":"","invoice":"203/2025-26/UP","basic":478912.25,"gst":86204.21,"total":565116.45,"status_70":"PAID","status_30":"ANNEXURE SUBMIT TO ZONE","from_zone":"","submit":""},{"zone":"ALIGARH","month":"May","year":"2025","miro":"","invoice":"204/2025-26/UP","basic":2832875.35,"gst":509917.56,"total":3342792.91,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"BANDA","month":"May","year":"2025","miro":"","invoice":"205/2025-26/UP","basic":456015.1,"gst":82082.72,"total":538097.82,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"ETAH","month":"May","year":"2025","miro":"","invoice":"206/2025-26/UP","basic":884324.45,"gst":159178.4,"total":1043502.85,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"FIROZABAD","month":"May","year":"2025","miro":"5100037956","invoice":"207/2025-26/UP","basic":829224.8,"gst":149260.46,"total":978485.26,"status_70":"PAID","status_30":"SUBMIT TO HV CELL","from_zone":"05.03.2026","submit":"Y"},{"zone":"JHANSI","month":"May","year":"2025","miro":"5100037966","invoice":"208/2025-26/UP","basic":1073013.3,"gst":193142.39,"total":1266155.69,"status_70":"PAID","status_30":"SUBMIT TO HV CELL","from_zone":"22.04.2026","submit":"y"},{"zone":"KANPUR-1","month":"May","year":"2025","miro":"","invoice":"209/2025-26/UP","basic":212603.7,"gst":38268.67,"total":250872.37,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"KANPUR-2","month":"May","year":"2025","miro":"","invoice":"210/2025-26/UP","basic":894273.75,"gst":160969.27,"total":1055243.02,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"MATHURA","month":"May","year":"2025","miro":"","invoice":"211/2025-26/UP","basic":1127393.25,"gst":202930.79,"total":1330324.03,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"AGRA","month":"April","year":"2025","miro":"5100025124","invoice":"110/2025-26/UP","basic":488777.1,"gst":87979.88,"total":576756.98,"status_70":"PAID","status_30":"ANNEXURE SUBMIT TO ZONE","from_zone":"","submit":""},{"zone":"ALIGARH","month":"April","year":"2025","miro":"5100025129","invoice":"111/2025-26/UP","basic":2829698.45,"gst":509345.72,"total":3339044.17,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"BANDA","month":"April","year":"2025","miro":"","invoice":"112/2025-26/UP","basic":465813.9,"gst":83846.5,"total":549660.4,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"ETAH","month":"April","year":"2025","miro":"","invoice":"113/2025-26/UP","basic":898318.05,"gst":161697.25,"total":1060015.3,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"FIROZABAD","month":"April","year":"2025","miro":"","invoice":"114/2025-26/UP","basic":853441.45,"gst":153619.46,"total":1007060.91,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"JHANSI","month":"April","year":"2025","miro":"5100025145","invoice":"115/2025-26/UP","basic":1090217.75,"gst":196239.2,"total":1286456.95,"status_70":"PAID","status_30":"CPC","from_zone":"","submit":""},{"zone":"KANPUR-1","month":"April","year":"2025","miro":"","invoice":"116/2025-26/UP","basic":213918.65,"gst":38505.36,"total":252424.01,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"KANPUR-2","month":"April","year":"2025","miro":"","invoice":"117/2025-26/UP","basic":918980.35,"gst":165416.46,"total":1084396.81,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"MATHURA","month":"April","year":"2025","miro":"","invoice":"118/2025-26/UP","basic":1137085.75,"gst":204675.43,"total":1341761.19,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"AGRA","month":"March","year":"2025","miro":"5100029662","invoice":"60/2025-26/UP","basic":519388.9,"gst":93490.0,"total":612878.9,"status_70":"PAID","status_30":"ANNEXURE SUBMIT TO ZONE","from_zone":"","submit":""},{"zone":"ALIGARH","month":"March","year":"2025","miro":"","invoice":"61/2025-26/UP","basic":2848836.35,"gst":512790.54,"total":3361626.89,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"BANDA","month":"March","year":"2025","miro":"","invoice":"62/2025-26/UP","basic":491656.9,"gst":88498.24,"total":580155.14,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"ETAH","month":"March","year":"2025","miro":"","invoice":"63/2025-26/UP","basic":922804.3,"gst":166104.77,"total":1088909.07,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"FIROZABAD","month":"March","year":"2025","miro":"","invoice":"64/2025-26/UP","basic":880755.1,"gst":158535.92,"total":1039291.02,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"JHANSI","month":"March","year":"2025","miro":"5100029663","invoice":"65/2025-26/UP","basic":1094278.65,"gst":196970.16,"total":1291248.81,"status_70":"PAID","status_30":"CPC","from_zone":"","submit":""},{"zone":"KANPUR-1","month":"March","year":"2025","miro":"","invoice":"66/2025-26/UP","basic":216732.3,"gst":39011.81,"total":255744.11,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"KANPUR-2","month":"March","year":"2025","miro":"","invoice":"67/2025-26/UP","basic":943520.9,"gst":169833.76,"total":1113354.66,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"MATHURA","month":"March","year":"2025","miro":"","invoice":"68/2025-26/UP","basic":1157923.45,"gst":208426.22,"total":1366349.67,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"AGRA","month":"February","year":"2025","miro":"5100013529","invoice":"828/2024-25/UP","basic":528461.15,"gst":95123.01,"total":623584.16,"status_70":"PAID","status_30":"ANNEXURE SUBMIT TO ZONE","from_zone":"","submit":""},{"zone":"ALIGARH","month":"February","year":"2025","miro":"","invoice":"829/2024-25/UP","basic":2868127.5,"gst":516262.95,"total":3384390.45,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"BANDA","month":"February","year":"2025","miro":"","invoice":"830/2024-25/UP","basic":494488.55,"gst":89007.94,"total":583496.49,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"ETAH","month":"February","year":"2025","miro":"","invoice":"831/2024-25/UP","basic":938445.65,"gst":168920.22,"total":1107365.87,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"FIROZABAD","month":"February","year":"2025","miro":"","invoice":"832/2024-25/UP","basic":911823.8,"gst":164128.28,"total":1075952.08,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"JHANSI","month":"February","year":"2025","miro":"","invoice":"833/2024-25/UP","basic":1098483.3,"gst":197726.99,"total":1296210.29,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"KANPUR-1","month":"February","year":"2025","miro":"","invoice":"834/2024-25/UP","basic":219598.2,"gst":39527.68,"total":259125.88,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"KANPUR-2","month":"February","year":"2025","miro":"","invoice":"835/2024-25/UP","basic":942821.9,"gst":169707.94,"total":1112529.84,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"MATHURA","month":"February","year":"2025","miro":"","invoice":"836/2024-25/UP","basic":1178401.0,"gst":212112.18,"total":1390513.18,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"AGRA","month":"January","year":"2025","miro":"5100138614","invoice":"757/2024-25/UP","basic":524271.85,"gst":94368.93,"total":618640.78,"status_70":"PAID","status_30":"ANNEXURE SUBMIT TO ZONE","from_zone":"","submit":""},{"zone":"ALIGARH","month":"January","year":"2025","miro":"","invoice":"758/2024-25/UP","basic":2876875.65,"gst":517837.62,"total":3394713.27,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"BANDA","month":"January","year":"2025","miro":"","invoice":"759/2024-25/UP","basic":506219.25,"gst":91119.47,"total":597338.72,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"ETAH","month":"January","year":"2025","miro":"","invoice":"760/2024-25/UP","basic":964911.45,"gst":173684.06,"total":1138595.51,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"FIROZABAD","month":"January","year":"2025","miro":"","invoice":"761/2024-25/UP","basic":915195.3,"gst":164735.15,"total":1079930.45,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"JHANSI","month":"January","year":"2025","miro":"5100138648","invoice":"762/2024-25/UP","basic":1107857.05,"gst":199414.27,"total":1307271.32,"status_70":"PAID","status_30":"SUBMIT TO HV CELL","from_zone":"","submit":""},{"zone":"KANPUR-1","month":"January","year":"2025","miro":"","invoice":"763/2024-25/UP","basic":218992.05,"gst":39418.57,"total":258410.62,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"KANPUR-2","month":"January","year":"2025","miro":"","invoice":"764/2024-25/UP","basic":955782.3,"gst":172040.81,"total":1127823.11,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"MATHURA","month":"January","year":"2025","miro":"","invoice":"765/2024-25/UP","basic":1189047.4,"gst":214028.53,"total":1403075.93,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"AGRA","month":"December","year":"2024","miro":"5100134765","invoice":"690/2024-25/UP","basic":527170.9,"gst":94890.76,"total":622061.66,"status_70":"PAID","status_30":"ANNEXURE SUBMIT TO ZONE","from_zone":"","submit":""},{"zone":"ALIGARH","month":"December","year":"2024","miro":"","invoice":"691/2024-25/UP","basic":2873715.55,"gst":517268.8,"total":3390984.35,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"BANDA","month":"December","year":"2024","miro":"","invoice":"692/2024-25/UP","basic":507669.65,"gst":91380.54,"total":599050.19,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"ETAH","month":"December","year":"2024","miro":"","invoice":"693/2024-25/UP","basic":958843.7,"gst":172591.87,"total":1131435.57,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"FIROZABAD","month":"December","year":"2024","miro":"","invoice":"694/2024-25/UP","basic":901508.65,"gst":162271.56,"total":1063780.21,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"JHANSI","month":"December","year":"2024","miro":"","invoice":"695/2024-25/UP","basic":1104517.65,"gst":198813.18,"total":1303330.83,"status_70":"PAID","status_30":"SUBMIT TO HV CELL","from_zone":"","submit":""},{"zone":"KANPUR-1","month":"December","year":"2024","miro":"","invoice":"696/2024-25/UP","basic":214479.45,"gst":38606.3,"total":253085.75,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"KANPUR-2","month":"December","year":"2024","miro":"","invoice":"697/2024-25/UP","basic":955847.8,"gst":172052.6,"total":1127900.4,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"MATHURA","month":"December","year":"2024","miro":"","invoice":"698/2024-25/UP","basic":1200743.3,"gst":216133.79,"total":1416877.09,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"AGRA","month":"November","year":"2024","miro":"","invoice":"","basic":527682.7,"gst":94982.89,"total":622665.59,"status_70":"PAID","status_30":"ANNEXURE SUBMIT TO ZONE","from_zone":"","submit":""},{"zone":"ALIGARH","month":"November","year":"2024","miro":"","invoice":"","basic":2869233.9,"gst":516462.1,"total":3385696.0,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"BANDA","month":"November","year":"2024","miro":"","invoice":"","basic":512224.4,"gst":92200.39,"total":604424.79,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"ETAH","month":"November","year":"2024","miro":"","invoice":"","basic":963417.75,"gst":173415.2,"total":1136832.95,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"FIROZABAD","month":"November","year":"2024","miro":"","invoice":"","basic":902260.7,"gst":162406.93,"total":1064667.63,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"JHANSI","month":"November","year":"2024","miro":"","invoice":"","basic":1099430.85,"gst":197897.55,"total":1297328.4,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"KANPUR-1","month":"November","year":"2024","miro":"","invoice":"","basic":214947.15,"gst":38690.49,"total":253637.64,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"KANPUR-2","month":"November","year":"2024","miro":"","invoice":"","basic":957643.4,"gst":172375.81,"total":1130019.21,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"MATHURA","month":"November","year":"2024","miro":"","invoice":"","basic":1215379.25,"gst":218768.27,"total":1434147.52,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"AGRA","month":"October","year":"2024","miro":"","invoice":"","basic":522917.1,"gst":94125.08,"total":617042.18,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"ALIGARH","month":"October","year":"2024","miro":"","invoice":"","basic":2855616.65,"gst":514011.0,"total":3369627.65,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"BANDA","month":"October","year":"2024","miro":"","invoice":"","basic":507326.0,"gst":91318.68,"total":598644.68,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"ETAH","month":"October","year":"2024","miro":"","invoice":"","basic":969518.05,"gst":174513.25,"total":1144031.3,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"FIROZABAD","month":"October","year":"2024","miro":"","invoice":"","basic":902875.85,"gst":162517.65,"total":1065393.5,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"JHANSI","month":"October","year":"2024","miro":"","invoice":"","basic":1101265.25,"gst":198227.75,"total":1299493.0,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"KANPUR-1","month":"October","year":"2024","miro":"","invoice":"","basic":214987.85,"gst":38697.81,"total":253685.66,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"KANPUR-2","month":"October","year":"2024","miro":"","invoice":"","basic":962781.0,"gst":173300.58,"total":1136081.58,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"MATHURA","month":"October","year":"2024","miro":"","invoice":"","basic":1232426.25,"gst":221836.73,"total":1454262.98,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"AGRA","month":"September","year":"2024","miro":"","invoice":"","basic":530868.0,"gst":95556.24,"total":626424.24,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"ALIGARH","month":"September","year":"2024","miro":"","invoice":"","basic":2845369.2,"gst":512166.46,"total":3357535.66,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"BANDA","month":"September","year":"2024","miro":"","invoice":"","basic":507006.2,"gst":91261.12,"total":598267.32,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"ETAH","month":"September","year":"2024","miro":"","invoice":"","basic":961676.05,"gst":173101.69,"total":1134777.74,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"FIROZABAD","month":"September","year":"2024","miro":"","invoice":"","basic":896560.95,"gst":161380.97,"total":1057941.92,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"JHANSI","month":"September","year":"2024","miro":"","invoice":"","basic":1087597.95,"gst":195767.63,"total":1283365.58,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"KANPUR-1","month":"September","year":"2024","miro":"","invoice":"","basic":212426.6,"gst":38236.79,"total":250663.39,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"KANPUR-2","month":"September","year":"2024","miro":"","invoice":"","basic":961107.75,"gst":172999.4,"total":1134107.15,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"MATHURA","month":"September","year":"2024","miro":"","invoice":"","basic":1242404.4,"gst":223632.79,"total":1466037.19,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"AGRA","month":"August","year":"2024","miro":"","invoice":"","basic":528527.4,"gst":95134.93,"total":623662.33,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"ALIGARH","month":"August","year":"2024","miro":"","invoice":"","basic":2831024.15,"gst":509584.35,"total":3340608.5,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"BANDA","month":"August","year":"2024","miro":"","invoice":"","basic":510400.8,"gst":91872.14,"total":602272.94,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"ETAH","month":"August","year":"2024","miro":"","invoice":"","basic":957379.85,"gst":172328.37,"total":1129708.22,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"FIROZABAD","month":"August","year":"2024","miro":"","invoice":"","basic":895840.6,"gst":161251.31,"total":1057091.91,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"JHANSI","month":"August","year":"2024","miro":"","invoice":"","basic":1067459.5,"gst":192142.71,"total":1259602.21,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"KANPUR-1","month":"August","year":"2024","miro":"","invoice":"","basic":216078.95,"gst":38894.21,"total":254973.16,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"KANPUR-2","month":"August","year":"2024","miro":"","invoice":"","basic":968046.3,"gst":174248.33,"total":1142294.63,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"MATHURA","month":"August","year":"2024","miro":"","invoice":"","basic":1219893.1,"gst":219580.76,"total":1439473.86,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"AGRA","month":"July","year":"2024","miro":"","invoice":"","basic":517438.6,"gst":93138.95,"total":610577.55,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"ALIGARH","month":"July","year":"2024","miro":"","invoice":"","basic":2805249.3,"gst":504944.87,"total":3310194.17,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"BANDA","month":"July","year":"2024","miro":"","invoice":"","basic":509783.35,"gst":91761.0,"total":601544.35,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"ETAH","month":"July","year":"2024","miro":"","invoice":"","basic":960110.7,"gst":172819.93,"total":1132930.63,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"FIROZABAD","month":"July","year":"2024","miro":"","invoice":"","basic":887651.8,"gst":159777.32,"total":1047429.12,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"JHANSI","month":"July","year":"2024","miro":"","invoice":"","basic":1046459.85,"gst":188362.77,"total":1234822.62,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"KANPUR-1","month":"July","year":"2024","miro":"","invoice":"","basic":217307.85,"gst":39115.41,"total":256423.26,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"KANPUR-2","month":"July","year":"2024","miro":"","invoice":"","basic":974906.85,"gst":175483.23,"total":1150390.08,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"MATHURA","month":"July","year":"2024","miro":"","invoice":"","basic":1204963.25,"gst":216893.39,"total":1421856.64,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"AGRA","month":"June","year":"2024","miro":"","invoice":"","basic":510724.45,"gst":91930.4,"total":602654.85,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"ALIGARH","month":"June","year":"2024","miro":"","invoice":"","basic":2791868.4,"gst":502536.31,"total":3294404.71,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"BANDA","month":"June","year":"2024","miro":"","invoice":"","basic":512281.3,"gst":92210.63,"total":604491.93,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"ETAH","month":"June","year":"2024","miro":"","invoice":"","basic":962530.6,"gst":173255.51,"total":1135786.11,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"FIROZABAD","month":"June","year":"2024","miro":"","invoice":"","basic":897824.55,"gst":161608.42,"total":1059432.97,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"JHANSI","month":"June","year":"2024","miro":"","invoice":"","basic":1057487.95,"gst":190347.83,"total":1247835.78,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"KANPUR-1","month":"June","year":"2024","miro":"","invoice":"","basic":219696.2,"gst":39545.32,"total":259241.52,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"KANPUR-2","month":"June","year":"2024","miro":"","invoice":"","basic":973520.2,"gst":175233.64,"total":1148753.84,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"MATHURA","month":"June","year":"2024","miro":"","invoice":"","basic":1177659.45,"gst":211978.7,"total":1389638.15,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"AGRA","month":"May","year":"2024","miro":"","invoice":"","basic":528473.7,"gst":95125.27,"total":623598.97,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"ALIGARH","month":"May","year":"2024","miro":"","invoice":"","basic":2769394.8,"gst":498491.06,"total":3267885.86,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"BANDA","month":"May","year":"2024","miro":"","invoice":"","basic":506471.8,"gst":91164.92,"total":597636.72,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"ETAH","month":"May","year":"2024","miro":"","invoice":"","basic":954970.35,"gst":171894.66,"total":1126865.01,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"FIROZABAD","month":"May","year":"2024","miro":"","invoice":"","basic":929799.3,"gst":167363.87,"total":1097163.17,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"JHANSI","month":"May","year":"2024","miro":"","invoice":"","basic":1048338.1,"gst":188700.86,"total":1237038.96,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"KANPUR-1","month":"May","year":"2024","miro":"","invoice":"","basic":224239.7,"gst":40363.15,"total":264602.85,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"KANPUR-2","month":"May","year":"2024","miro":"","invoice":"","basic":992234.0,"gst":178602.12,"total":1170836.12,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"MATHURA","month":"May","year":"2024","miro":"","invoice":"","basic":1171107.05,"gst":210799.27,"total":1381906.32,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"AGRA","month":"April","year":"2024","miro":"","invoice":"","basic":522438.15,"gst":94038.87,"total":616477.02,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"ALIGARH","month":"April","year":"2024","miro":"","invoice":"","basic":2720144.65,"gst":489626.04,"total":3209770.69,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"BANDA","month":"April","year":"2024","miro":"","invoice":"","basic":492884.4,"gst":88719.19,"total":581603.59,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"ETAH","month":"April","year":"2024","miro":"","invoice":"","basic":933086.85,"gst":167955.63,"total":1101042.48,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"FIROZABAD","month":"April","year":"2024","miro":"","invoice":"","basic":940356.45,"gst":169264.16,"total":1109620.61,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"JHANSI","month":"April","year":"2024","miro":"","invoice":"","basic":1079748.55,"gst":194354.74,"total":1274103.29,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"KANPUR-1","month":"April","year":"2024","miro":"","invoice":"","basic":232256.8,"gst":41806.22,"total":274063.02,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"KANPUR-2","month":"April","year":"2024","miro":"","invoice":"","basic":987968.7,"gst":177834.37,"total":1165803.07,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"MATHURA","month":"April","year":"2024","miro":"","invoice":"","basic":1130201.75,"gst":203436.32,"total":1333638.07,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"AGRA","month":"March","year":"2024","miro":"","invoice":"","basic":528306.45,"gst":95095.16,"total":623401.61,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"ALIGARH","month":"March","year":"2024","miro":"","invoice":"","basic":2684875.95,"gst":483277.67,"total":3168153.62,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"BANDA","month":"March","year":"2024","miro":"","invoice":"","basic":478889.6,"gst":86200.13,"total":565089.73,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"ETAH","month":"March","year":"2024","miro":"","invoice":"","basic":929341.0,"gst":167281.38,"total":1096622.38,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"FIROZABAD","month":"March","year":"2024","miro":"","invoice":"","basic":919044.45,"gst":165428.0,"total":1084472.45,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"JHANSI","month":"March","year":"2024","miro":"","invoice":"","basic":1060062.1,"gst":190811.18,"total":1250873.28,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"KANPUR-1","month":"March","year":"2024","miro":"","invoice":"","basic":239352.1,"gst":43083.38,"total":282435.48,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"KANPUR-2","month":"March","year":"2024","miro":"","invoice":"","basic":998990.45,"gst":179818.28,"total":1178808.73,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"MATHURA","month":"March","year":"2024","miro":"","invoice":"","basic":1132333.6,"gst":203820.05,"total":1336153.65,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"AGRA","month":"February","year":"2024","miro":"","invoice":"","basic":515133.45,"gst":92724.02,"total":607857.47,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"ALIGARH","month":"February","year":"2024","miro":"","invoice":"","basic":2618206.7,"gst":471277.21,"total":3089483.91,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"BANDA","month":"February","year":"2024","miro":"","invoice":"","basic":408720.0,"gst":73569.6,"total":482289.6,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"ETAH","month":"February","year":"2024","miro":"","invoice":"","basic":894289.35,"gst":160972.08,"total":1055261.43,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"FIROZABAD","month":"February","year":"2024","miro":"","invoice":"","basic":913471.05,"gst":164424.79,"total":1077895.84,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"JHANSI","month":"February","year":"2024","miro":"","invoice":"","basic":1029348.9,"gst":185282.8,"total":1214631.7,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"KANPUR-1","month":"February","year":"2024","miro":"","invoice":"","basic":239952.35,"gst":43191.42,"total":283143.77,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"KANPUR-2","month":"February","year":"2024","miro":"","invoice":"","basic":993434.25,"gst":178818.17,"total":1172252.42,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"MATHURA","month":"February","year":"2024","miro":"","invoice":"","basic":1087778.05,"gst":195800.05,"total":1283578.1,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"AGRA","month":"January","year":"2024","miro":"","invoice":"","basic":495627.65,"gst":89212.98,"total":584840.63,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"ALIGARH","month":"January","year":"2024","miro":"","invoice":"","basic":2531422.95,"gst":455656.13,"total":2987079.08,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"BANDA","month":"January","year":"2024","miro":"","invoice":"","basic":356646.9,"gst":64196.44,"total":420843.34,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"ETAH","month":"January","year":"2024","miro":"","invoice":"","basic":861519.85,"gst":155073.57,"total":1016593.42,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"FIROZABAD","month":"January","year":"2024","miro":"","invoice":"","basic":898779.75,"gst":161780.36,"total":1060560.11,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"JHANSI","month":"January","year":"2024","miro":"","invoice":"","basic":899118.05,"gst":161841.25,"total":1060959.3,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"KANPUR-1","month":"January","year":"2024","miro":"","invoice":"","basic":233779.3,"gst":42080.27,"total":275859.57,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"KANPUR-2","month":"January","year":"2024","miro":"","invoice":"","basic":985658.65,"gst":177418.56,"total":1163077.21,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"MATHURA","month":"January","year":"2024","miro":"","invoice":"","basic":1038005.85,"gst":186841.05,"total":1224846.9,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"AGRA","month":"December","year":"2023","miro":"","invoice":"","basic":358015.45,"gst":64442.78,"total":422458.23,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"ALIGARH","month":"December","year":"2023","miro":"","invoice":"","basic":1847268.65,"gst":332508.36,"total":2179777.01,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"BANDA","month":"December","year":"2023","miro":"","invoice":"","basic":186473.0,"gst":33565.14,"total":220038.14,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"ETAH","month":"December","year":"2023","miro":"","invoice":"","basic":569244.7,"gst":102464.05,"total":671708.75,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"FIROZABAD","month":"December","year":"2023","miro":"","invoice":"","basic":737301.15,"gst":132714.21,"total":870015.36,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"JHANSI","month":"December","year":"2023","miro":"","invoice":"","basic":499517.9,"gst":89913.22,"total":589431.12,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"KANPUR-1","month":"December","year":"2023","miro":"","invoice":"","basic":185557.6,"gst":33400.37,"total":218957.97,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"KANPUR-2","month":"December","year":"2023","miro":"","invoice":"","basic":774650.6,"gst":139437.11,"total":914087.71,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"MATHURA","month":"December","year":"2023","miro":"","invoice":"","basic":777791.2,"gst":140002.42,"total":917793.62,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"AGRA","month":"November","year":"2023","miro":"","invoice":"","basic":238490.0,"gst":42928.2,"total":281418.2,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"ALIGARH","month":"November","year":"2023","miro":"","invoice":"","basic":1387578.35,"gst":249764.1,"total":1637342.45,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"BANDA","month":"November","year":"2023","miro":"","invoice":"","basic":101374.4,"gst":18247.39,"total":119621.79,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"ETAH","month":"November","year":"2023","miro":"","invoice":"","basic":354172.2,"gst":63751.0,"total":417923.2,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"FIROZABAD","month":"November","year":"2023","miro":"","invoice":"","basic":385573.45,"gst":69403.22,"total":454976.67,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"JHANSI","month":"November","year":"2023","miro":"","invoice":"","basic":270508.15,"gst":48691.47,"total":319199.62,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"KANPUR-1","month":"November","year":"2023","miro":"","invoice":"","basic":164770.05,"gst":29658.61,"total":194428.66,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"KANPUR-2","month":"November","year":"2023","miro":"","invoice":"","basic":606249.65,"gst":109124.94,"total":715374.59,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""},{"zone":"MATHURA","month":"November","year":"2023","miro":"","invoice":"","basic":679912.05,"gst":122384.17,"total":802296.22,"status_70":"PAID","status_30":"PAID","from_zone":"","submit":""}];
-var MONTHS_ARR=["January","February","March","April","May","June","July","August","September","October","November","December"];
-var ST5={
-  "PAID":{c:"#4caf50",bg:"rgba(76,175,80,.13)",br:"rgba(76,175,80,.35)",lb:"PAID"},
-  "ERP":{c:"#00acc1",bg:"rgba(0,172,193,.13)",br:"rgba(0,172,193,.35)",lb:"ERP ✓"},
-  "SUBMIT TO HV CELL":{c:"#42a5f5",bg:"rgba(66,165,245,.13)",br:"rgba(66,165,245,.35)",lb:"HV Cell"},
-  "ANNEXURE SUBMIT TO ZONE":{c:"#80deea",bg:"rgba(128,222,234,.13)",br:"rgba(128,222,234,.35)",lb:"Ann/Zone"},
-  "CPC":{c:"#ffab40",bg:"rgba(255,171,64,.13)",br:"rgba(255,171,64,.35)",lb:"CPC"},
-  "UNDER VERIFICATION":{c:"#ff7043",bg:"rgba(255,112,67,.13)",br:"rgba(255,112,67,.35)",lb:"U/Verif."},
-  "":{c:"#3a5a7a",bg:"rgba(58,90,122,.07)",br:"rgba(58,90,122,.18)",lb:"—"}
-};
-function p2Paid(r){return r.status_30==="PAID";}
-function p2Badge(s,big){
-  var st=ST5[s]||ST5[""];
-  var sz=big?".78rem":".65rem";
-  var pd=big?"4px 11px":"2px 7px";
-  return "<span style=\"display:inline-flex;align-items:center;gap:4px;padding:"+pd+";border-radius:20px;font-size:"+sz+";font-weight:700;background:"+st.bg+";color:"+st.c+";border:1px solid "+st.br+";white-space:nowrap\"><span style=\"width:5px;height:5px;border-radius:50%;background:currentColor\"></span>"+st.lb+"</span>";
-}
-var p2SM="",p2SY="",p2AMY=[],p2Data=[],p2All=[];
-function p2Init(){
-  var seen={};
-  RECORDS_5KW.forEach(function(r){var k=r.month+"|"+r.year;if(!seen[k]&&r.month&&r.year){seen[k]=1;p2AMY.push({month:r.month,year:r.year});}});
-  p2AMY.sort(function(a,b){var ya=parseInt(a.year),yb=parseInt(b.year);if(ya!==yb)return ya-yb;return MONTHS_ARR.indexOf(a.month)-MONTHS_ARR.indexOf(b.month);});
-  var last=p2AMY[p2AMY.length-1];
-  p2SM=last.month;p2SY=last.year;
-  var zones=[...new Set(RECORDS_5KW.map(function(r){return r.zone;}))].sort();
-  var sel=document.getElementById("p2-zone");
-  if(sel){zones.forEach(function(z){var o=document.createElement("option");o.value=z;o.textContent=z;sel.appendChild(o);});}
-  p2BuildPop();p2UpdDisp();p2ApplyF();p2Trend();
-  document.addEventListener("click",function(e){if(!e.target.closest("#p2-md"))document.getElementById("p2-pop").style.display="none";});
-}
-function p2BuildPop(){
-  var years=[...new Set(p2AMY.map(function(m){return m.year;}))].sort();
-  var h="<div style=\"display:flex;gap:5px;justify-content:center;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--border)\">";
-  years.forEach(function(y){h+="<span onclick=\"p2SelY('"+y+"',event)\" style=\"padding:3px 13px;border-radius:20px;cursor:pointer;font-size:.78rem;border:1px solid "+(y===p2SY?"var(--teal)":"transparent")+";background:"+(y===p2SY?"rgba(0,196,216,.18)":"transparent")+";color:"+(y===p2SY?"var(--teal)":"var(--muted)")+"\">"+y+"</span>";});
-  h+="</div><div style=\"display:grid;grid-template-columns:repeat(4,1fr);gap:5px\">";
-  MONTHS_ARR.forEach(function(m){
-    var has=p2AMY.some(function(my){return my.month===m&&my.year===p2SY;});
-    var isSel=m===p2SM;
-    h+="<span onclick=\""+(has?"p2SelM('"+m+"',event)":"event.stopPropagation()")+"\" style=\"padding:6px;border-radius:6px;font-size:.77rem;text-align:center;cursor:"+(has?"pointer":"not-allowed")+";border:1px solid "+(isSel?"var(--teal)":"transparent")+";background:"+(isSel?"rgba(0,196,216,.18)":"transparent")+";color:"+(isSel?"var(--teal)":has?"var(--text2)":"rgba(100,116,139,.3)")+";font-weight:"+(isSel?700:400)+"\">"+m.slice(0,3)+"</span>";
-  });
-  h+="</div>";
-  document.getElementById("p2-pop").innerHTML=h;
-}
-function p2TglPop(e){e.stopPropagation();var p=document.getElementById("p2-pop");p.style.display=p.style.display==="block"?"none":"block";}
-function p2SelY(y,e){e.stopPropagation();p2SY=y;var av=p2AMY.filter(function(m){return m.year===y;});if(!av.some(function(m){return m.month===p2SM;}))p2SM=av[av.length-1].month;p2BuildPop();document.getElementById("p2-pop").style.display="block";p2UpdDisp();p2ApplyF();}
-function p2SelM(m,e){e.stopPropagation();p2SM=m;p2BuildPop();document.getElementById("p2-pop").style.display="none";p2UpdDisp();p2ApplyF();}
-function p2ShiftM(d){var i=p2AMY.findIndex(function(m){return m.month===p2SM&&m.year===p2SY;});var ni=i+d;if(ni>=0&&ni<p2AMY.length){p2SM=p2AMY[ni].month;p2SY=p2AMY[ni].year;p2UpdDisp();p2BuildPop();p2ApplyF();}}
-function p2UpdDisp(){document.getElementById("p2-md").childNodes[0].textContent=p2SM+" "+p2SY+" ";var i=p2AMY.findIndex(function(m){return m.month===p2SM&&m.year===p2SY;});document.getElementById("p2-prev").disabled=i<=0;document.getElementById("p2-next").disabled=i>=p2AMY.length-1;}
-function p2ApplyF(){
-  var fZ=document.getElementById("p2-zone")?.value||"";
-  var fS=document.getElementById("p2-stage")?.value||"";
-  var data=RECORDS_5KW.filter(function(r){return r.month===p2SM&&r.year===p2SY;});
-  if(fZ)data=data.filter(function(r){return r.zone===fZ;});
-  p2All=data;
-  var pending=data.filter(function(r){return !p2Paid(r);});
-  if(fS)pending=pending.filter(function(r){return r.status_30===fS||r.status_70===fS;});
-  p2Data=pending;
-  var paidZ=data.filter(function(r){return p2Paid(r);});
-  var info=document.getElementById("p2-paid-info");
-  if(info){
-    if(paidZ.length>0){
-      info.innerHTML="<span style=\"background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);border-radius:8px;padding:5px 14px;font-size:.75rem;color:var(--green)\">✅ "+paidZ.length+" zone"+(paidZ.length>1?"s":"")+" fully PAID (hidden): "+paidZ.map(function(r){return r.zone;}).join(", ")+"</span>";
-    }else{info.innerHTML="";}
-  }
-  p2Hero(paidZ.length);p2KPIs();p2Summary();p2ZoneTable();
-}
-function p2Hero(paidCnt){
-  var tot=p2All.length,pnd=p2Data.length;
-  var p70=p2All.filter(function(r){return r.status_70==="PAID";}).length;
-  var p30=p2All.filter(function(r){return r.status_30==="PAID";}).length;
-  var pc70=tot>0?Math.round(p70/tot*100):0,pc30=tot>0?Math.round(p30/tot*100):0;
-  var clr=pc30>=80?"var(--green)":pc30>=50?"var(--gold)":"var(--red)";
-  var lbl=pc30>=80?"✅ On Track":pc30>=50?"⚠ In Progress":"🔴 Needs Attention";
-  document.getElementById("p2-hero").innerHTML="<div><div class=\"hero-month\">"+p2SM+" "+p2SY+"</div><div style=\"font-size:.72rem;color:var(--muted);margin-top:3px\">"+lbl+"</div></div><div class=\"hero-bar-wrap\"><div class=\"hero-lbl\"><span>70% Paid: <strong style=\"color:var(--green)\">"+p70+"/"+tot+"</strong></span><span style=\"color:var(--green)\"><strong>"+pc70+"%</strong></span></div><div class=\"hero-bar\"><div class=\"hero-fill\" style=\"width:"+pc70+"%;background:var(--green)\"></div></div><div style=\"margin-top:7px\"><div class=\"hero-lbl\"><span>30% Paid: <strong style=\"color:"+clr+"\">"+p30+"/"+tot+"</strong></span><span style=\"color:"+clr+"\"><strong>"+pc30+"%</strong></span></div><div class=\"hero-bar\" style=\"margin-top:4px\"><div class=\"hero-fill\" style=\"width:"+pc30+"%;background:"+clr+"\"></div></div></div></div><div class=\"hero-stats\"><div class=\"hs\"><div class=\"hs-v\" style=\"color:var(--green)\">"+paidCnt+"</div><div class=\"hs-l\">Fully Paid</div></div><div class=\"hs\"><div class=\"hs-v\" style=\"color:var(--red)\">"+pnd+"</div><div class=\"hs-l\">Pending</div></div><div class=\"hs\"><div class=\"hs-v\" style=\"color:var(--teal)\">"+tot+"</div><div class=\"hs-l\">Total</div></div></div>";
-}
-function p2KPIs(){
-  var tot=p2Data.length;
-  // 70% stages
-  var s70=["PAID","SUBMIT TO HV CELL"];
-  var c70={"PAID":"var(--green)","SUBMIT TO HV CELL":"var(--teal)"};
-  var cnt70={};
-  s70.forEach(function(s){cnt70[s]=0;});
-  p2All.forEach(function(r){if(cnt70[r.status_70]!==undefined)cnt70[r.status_70]++;});
-  // 30% stages
-  var s30=["PAID","ERP","SUBMIT TO HV CELL","UNDER VERIFICATION","CPC","ANNEXURE SUBMIT TO ZONE"];
-  var c30={"PAID":"var(--green)","ERP":"#10b981","SUBMIT TO HV CELL":"var(--teal)","UNDER VERIFICATION":"#f97316","CPC":"var(--gold)","ANNEXURE SUBMIT TO ZONE":"var(--sky)"};
-  var cnt30={};
-  s30.forEach(function(s){cnt30[s]=0;});
-  p2All.forEach(function(r){if(cnt30[r.status_30]!==undefined)cnt30[r.status_30]++;});
-  var allTot=p2All.length;
-  var html70=s70.map(function(s){
-    var c=c70[s],pct=allTot>0?Math.round(cnt70[s]/allTot*100):0,lb=ST5[s]?ST5[s].lb:s;
-    return "<div class=\"kpi\" style=\"--ac:"+c+";cursor:default\"><div class=\"kpi-l\">70% — "+lb+"</div><div class=\"kpi-v\">"+cnt70[s]+"</div><div class=\"kpi-s\">"+pct+"% of "+allTot+" zones</div><div class=\"kpi-bar\"><div class=\"kpi-f\" style=\"width:"+pct+"%;background:"+c+"\"></div></div></div>";
-  }).join("");
-  var html30=s30.map(function(s){
-    var c=c30[s],pct=allTot>0?Math.round(cnt30[s]/allTot*100):0,lb=ST5[s]?ST5[s].lb:s;
-    return "<div class=\"kpi\" style=\"--ac:"+c+";cursor:default\"><div class=\"kpi-l\">30% — "+lb+"</div><div class=\"kpi-v\">"+cnt30[s]+"</div><div class=\"kpi-s\">"+pct+"% of "+allTot+" zones</div><div class=\"kpi-bar\"><div class=\"kpi-f\" style=\"width:"+pct+"%;background:"+c+"\"></div></div></div>";
-  }).join("");
-  document.getElementById("p2-kpis").innerHTML=html70+html30;
-}
-function p2ZoneTable(){
-  var pc=document.getElementById("p2-pc2");
-  if(pc)pc.textContent=p2Data.length+" zones pending";
-  var tb=document.getElementById("p2-zone-tbody");
-  if(!p2Data.length){tb.innerHTML="<tr><td colspan=\"4\"><div class=\"no-data\"><div class=\"no-ico\">✅</div>All zones 30% PAID for "+p2SM+" "+p2SY+"!</div></td></tr>";return;}
-  tb.innerHTML=p2Data.map(function(r){return "<tr><td><span class=\"zch\" style=\"font-size:.82rem;padding:3px 10px\">"+r.zone+"</span></td><td style=\"font-family:var(--fm);font-size:.75rem;color:var(--muted)\">"+(r.invoice||"—")+"</td><td style=\"text-align:center\">"+p2Badge(r.status_70,true)+"</td><td style=\"text-align:center\">"+p2Badge(r.status_30,true)+"</td></tr>";}).join("");
-}
-function p2Summary(){
-  // Group pending zones by 30% stage
-  var stages=["UNDER VERIFICATION","ANNEXURE SUBMIT TO ZONE","CPC","SUBMIT TO HV CELL","ERP"];
-  var stageColors={"UNDER VERIFICATION":"#f97316","ANNEXURE SUBMIT TO ZONE":"var(--sky)","CPC":"var(--gold)","SUBMIT TO HV CELL":"var(--teal)","ERP":"#10b981"};
-  var stageNames={"UNDER VERIFICATION":"Under Verification","ANNEXURE SUBMIT TO ZONE":"Annexure Submit to Zone","CPC":"CPC","SUBMIT TO HV CELL":"Submit to HV Cell","ERP":"ERP (SAP Entry)"};
-  var grouped={};
-  stages.forEach(function(s){grouped[s]=[];});
-  p2Data.forEach(function(r){
-    if(grouped[r.status_30]!==undefined) grouped[r.status_30].push(r);
-  });
-  // Count non-empty stages
-  var activeStages=stages.filter(function(s){return grouped[s].length>0;});
-  var pc=document.getElementById("p2-sum-pc");
-  if(pc)pc.textContent=activeStages.length+" active stages";
-  var grid=document.getElementById("p2-summary-grid");
-  if(!grid)return;
-  if(p2Data.length===0){
-    grid.innerHTML="<div class=\"no-data\" style=\"grid-column:1/-1\"><div class=\"no-ico\">✅</div>All zones 30% PAID!</div>";
-    return;
-  }
-  grid.innerHTML=activeStages.map(function(s){
-    var zones=grouped[s];
-    var c=stageColors[s]||"var(--muted)";
-    var name=stageNames[s]||s;
-    var zoneChips=zones.map(function(r){
-      return "<span style=\"display:inline-block;padding:3px 10px;border-radius:6px;font-size:.75rem;font-weight:600;background:var(--surf);border:1px solid var(--border);color:var(--text);margin:2px\">"+r.zone+"</span>";
-    }).join("");
-    return "<div style=\"background:var(--surf);border:1px solid "+c.replace("var(--","").replace(")","")+"11,"+c+");border-radius:10px;overflow:hidden\">"+
-      "<div style=\"padding:10px 14px;background:"+c.replace("var(","").replace(")","")+"11;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center\">"+
-        "<span style=\"font-family:var(--fh);font-size:.88rem;font-weight:700;color:"+c+"\">"+name+"</span>"+
-        "<span style=\"background:"+c+"22;border:1px solid "+c+"44;border-radius:20px;padding:2px 10px;font-size:.72rem;font-weight:700;color:"+c+"\">"+zones.length+" zone"+(zones.length>1?"s":"")+"</span>"+
-      "</div>"+
-      "<div style=\"padding:10px 14px;display:flex;flex-wrap:wrap;gap:4px\">"+zoneChips+"</div>"+
-    "</div>";
-  }).join("");
-}
-function p2Trend(){
-  var zones=[...new Set(RECORDS_5KW.map(function(r){return r.zone;}))].sort();
-  var th="<tr style=\"background:rgba(0,111,168,.1)\"><th style=\"padding:7px 12px;font-family:var(--fh);font-size:.75rem;color:var(--teal);border-bottom:1px solid var(--border);text-align:left;white-space:nowrap;position:sticky;left:0;background:var(--surf2)\">Zone</th>";
-  p2AMY.forEach(function(m){th+="<th style=\"padding:5px 6px;font-family:var(--fh);font-size:.63rem;color:var(--teal);border-bottom:1px solid var(--border);text-align:center;white-space:nowrap;min-width:62px\">"+m.month.slice(0,3)+"<br><span style=\"color:var(--muted)\">"+m.year.slice(2)+"</span></th>";});
-  th+="</tr>";
-  document.getElementById("p2-trend-head").innerHTML=th;
-  var tb="";
-  zones.forEach(function(z,zi){
-    var zr=RECORDS_5KW.filter(function(r){return r.zone===z;});
-    var paid=zr.filter(function(r){return p2Paid(r);}).length;
-    var tot=zr.length,pct=tot>0?Math.round(paid/tot*100):0;
-    var clr=pct>=80?"var(--green)":pct>=50?"var(--gold)":"var(--red)";
-    tb+="<tr style=\""+(zi%2===0?"background:rgba(0,111,168,.03)":"")+"\"><td style=\"padding:6px 12px;font-size:.78rem;font-weight:600;color:var(--text);white-space:nowrap;border-bottom:1px solid rgba(0,111,168,.07);position:sticky;left:0;background:"+(zi%2===0?"var(--surf2)":"var(--surf)")+"\">"+z+"<span style=\"margin-left:6px;font-size:.65rem;color:"+clr+"\">"+pct+"%</span></td>";
-    p2AMY.forEach(function(m){
-      var rec=RECORDS_5KW.find(function(r){return r.zone===z&&r.month===m.month&&r.year===m.year;});
-      var s30=rec?rec.status_30:"",s70=rec?rec.status_70:"";
-      var fp=s70==="PAID"&&s30==="PAID";
-      var st=ST5[s30]||ST5[""];
-      var cell=fp?"<span style=\"display:inline-block;padding:2px 5px;border-radius:4px;font-size:.62rem;font-weight:700;background:rgba(34,197,94,.13);color:var(--green);border:1px solid rgba(34,197,94,.3)\">✓ PAID</span>":"<span style=\"display:inline-block;padding:2px 5px;border-radius:4px;font-size:.62rem;font-weight:700;background:"+st.bg+";color:"+st.c+";border:1px solid "+st.br+"\">"+st.lb+"</span>";
-      tb+="<td style=\"padding:4px 4px;text-align:center;border-bottom:1px solid rgba(0,111,168,.07)\">"+cell+"</td>";
-    });
-    tb+="</tr>";
-  });
-  document.getElementById("p2-trend-body").innerHTML=tb;
-}
-function p2Reset(){document.getElementById("p2-zone").value="";document.getElementById("p2-stage").value="";p2ApplyF();}
-function p2Export(){
-  var rows=[["Zone","Month","Year","Invoice No.","70% Status","30% Status","Fully Paid"]];
-  p2All.forEach(function(r){rows.push([r.zone,r.month,r.year,r.invoice||"",r.status_70,r.status_30,p2Paid(r)?"YES":"NO"]);});
-  var csv=rows.map(function(r){return r.map(function(c){return "\""+String(c||"").replace(/"/g,"\"\"")+"\""}).join(",");}).join("\n");
-  var a=document.createElement("a");a.href="data:text/csv;charset=utf-8,\uFEFF"+encodeURIComponent(csv);a.download="5KW_"+p2SM+"_"+p2SY+".csv";a.click();
-}
+__DATA_PLACEHOLDER__
 
 // Boot
 if(typeof MONTHLY_STATUS!=='undefined'&&typeof MASTER_ALL!=='undefined'){
@@ -1326,97 +1130,257 @@ function p4UpdateMD(){const el=document.getElementById('p4-md');if(el)el.childNo
 function p4ApplyF(){
   p4UpdateMD();
   const d5=RECORDS_5KW.filter(r=>r.month===p4SM&&r.year===p4SY);
-  const r10=window.RECORDS_10KW?RECORDS_10KW.find(r=>r.month===p4SM&&r.year===p4SY):null;
-  p4RenderMainTable(d5,r10);p4RenderPipeline();
+  p4RenderMainTable();
+  p4RenderPipeline();
   if(p4CurTab==='5kw')p4RenderDetail5(d5);
   else if(p4CurTab==='10kw')p4RenderDetail10();
 }
-function p4RenderMainTable(d5,r10){
-  const zones=[...new Set(RECORDS_5KW.map(r=>r.zone))].sort();
-  let gt_70=0,gt_ret=0,gt_10kw=0,rows='';
-  zones.forEach(z=>{
-    const zr=d5.find(r=>r.zone===z);
-    if(!zr){rows+=`<tr><td class="p4-zone-cell" style="color:var(--muted)">${z}</td><td colspan="5" style="text-align:center;color:var(--muted);font-size:.72rem">No data this month</td><td class="p4-total-cell">—</td></tr>`;return;}
-    const p70=zr.status_70==='PAID',p30=zr.status_30==='PAID',allPaid=p70&&p30;
-    const show70=p70?0:zr.amt_70||zr.basic;
-    const showRet=p30?0:zr.amt_30||zr.gst;
-    gt_70+=show70;gt_ret+=showRet;
-    const zclr=allPaid?'var(--p4-green)':!p70?'var(--p4-red)':'var(--p4-gold)';
-    rows+=`<tr class="${allPaid?'p4-paid-row':''}">
-      <td class="p4-zone-cell" style="color:${zclr}">${z}</td>
-      <td class="p4-amt-cell" style="color:${p70?'var(--muted)':'var(--p4-sky)'}">
-        ${show70>0?p4FmtFull(show70):p70?'<span style="color:var(--p4-green);font-size:.68rem">✅ Paid</span>':'—'}</td>
-      <td style="text-align:center">${p4Badge(zr.status_70)}</td>
-      <td class="p4-amt-cell" style="color:${p30?'var(--muted)':'var(--p4-gold)'}">
-        ${showRet>0?p4FmtFull(showRet):p30?'<span style="color:var(--p4-green);font-size:.68rem">✅ Paid</span>':'—'}</td>
-      <td class="p4-amt-cell" style="color:var(--muted)">—</td>
-      <td style="text-align:center">—</td>
-      <td class="p4-total-cell" style="color:${allPaid?'var(--muted)':'var(--purple)'}">
-        ${allPaid?'<span style="color:var(--p4-green);font-size:.68rem">✅ Clear</span>':p4FmtFull(zr.total)}</td>
+// ── MAIN: Pipeline Stage Summary ────────────────────────
+// Stage order (pipeline flow — lower = more processed)
+const P4_STAGE_ORDER = [
+  'PAID',
+  'CPC',
+  'ERP',
+  'SUBMIT TO HV CELL',
+  'ANNEXURE SUBMIT TO ZONE',
+  'RE-VERIFICATION',
+  'UNDER VERIFICATION',
+];
+// Upper stages use col18 (actual 30% after verification) — already applied in data extraction
+
+function p4RenderMainTable(){
+  if(!window.RECORDS_5KW||!RECORDS_5KW.length) return;
+
+  // ── Compute stage-wise totals across ALL pending records ──────────
+  // 70% stage buckets
+  const s70map = {};
+  // 30% stage buckets — split by 5KW amt_70, 5KW amt_30, 10KW amount
+  const s30map = {};
+
+  // Init all stages
+  P4_STAGE_ORDER.forEach(s => {
+    s70map[s] = { amt:0, zones:new Set() };
+    s30map[s] = { amt5_70:0, amt5_30:0, amt10:0, zones5:new Set(), months10:[] };
+  });
+
+  // 5KW: all records (all months combined)
+  RECORDS_5KW.forEach(r => {
+    // 70% stage
+    const s70 = r.status_70||'';
+    if(s70 !== 'PAID' && s70map[s70]) {
+      s70map[s70].amt += r.amt_70||0;
+      s70map[s70].zones.add(r.zone);
+    }
+    // 30% stage
+    const s30 = r.status_30||'';
+    if(s30 !== 'PAID' && s30map[s30]) {
+      s30map[s30].amt5_70 += r.amt_70||0;
+      s30map[s30].amt5_30 += r.amt_30||0;
+      s30map[s30].zones5.add(r.zone);
+    }
+  });
+
+  // 10KW: pending months only
+  if(window.RECORDS_10KW) {
+    RECORDS_10KW.forEach(r => {
+      if(r.paid) return;
+      const s = r.status||'';
+      if(s30map[s]) {
+        s30map[s].amt10 += r.amount||0;
+        s30map[s].months10.push(r.month.slice(0,3)+' '+r.year);
+      }
+    });
+  }
+
+  // ── Render ────────────────────────────────────────────────────────
+  const activeStages30 = P4_STAGE_ORDER.filter(s => s!=='PAID' &&
+    (s30map[s].amt5_30 > 0 || s30map[s].amt10 > 0));
+  const activeStages70 = P4_STAGE_ORDER.filter(s => s!=='PAID' &&
+    s70map[s].amt > 0);
+
+  // Grand totals
+  const gt5_70  = activeStages70.reduce((s,k) => s + s70map[k].amt, 0);
+  const gt5_30  = activeStages30.reduce((s,k) => s + s30map[k].amt5_30, 0);
+  const gt10    = activeStages30.reduce((s,k) => s + s30map[k].amt10, 0);
+  const gtTotal = gt5_70 + gt5_30 + gt10;
+
+  // Stage badge colors for pipeline
+  const stageColor = {
+    'UNDER VERIFICATION':         '#ef4444',
+    'RE-VERIFICATION':            '#f97316',
+    'ANNEXURE SUBMIT TO ZONE':    '#38bdf8',
+    'SUBMIT TO HV CELL':          '#f59e0b',
+    'ERP':                        '#a78bfa',
+    'CPC':                        '#818cf8',
+    'PAID':                       '#22c55e',
+  };
+  function sColor(s){ return stageColor[s]||'#64748b'; }
+
+  let html = '';
+
+  // ── KPI row at top ────────────────────────────────────────────────
+  html += `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:20px">
+    <div style="background:rgba(0,196,216,.07);border:1px solid rgba(0,196,216,.2);border-radius:10px;padding:12px 14px">
+      <div style="font-size:.62rem;text-transform:uppercase;letter-spacing:.09em;color:var(--teal);font-weight:700;margin-bottom:4px">🔌 5KW 70% Outstanding</div>
+      <div style="font-family:var(--fh);font-size:1.4rem;font-weight:700;color:var(--teal)">${p4Fmt(gt5_70)}</div>
+      <div style="font-size:.65rem;color:var(--muted);margin-top:2px">Across ${activeStages70.length} stages</div>
+    </div>
+    <div style="background:rgba(56,189,248,.07);border:1px solid rgba(56,189,248,.2);border-radius:10px;padding:12px 14px">
+      <div style="font-size:.62rem;text-transform:uppercase;letter-spacing:.09em;color:var(--sky);font-weight:700;margin-bottom:4px">🔌 5KW 30% Outstanding</div>
+      <div style="font-family:var(--fh);font-size:1.4rem;font-weight:700;color:var(--sky)">${p4Fmt(gt5_30)}</div>
+      <div style="font-size:.65rem;color:var(--muted);margin-top:2px">Across ${activeStages30.length} stages</div>
+    </div>
+    <div style="background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:12px 14px">
+      <div style="font-size:.62rem;text-transform:uppercase;letter-spacing:.09em;color:var(--p4-gold);font-weight:700;margin-bottom:4px">⚡ 10KW+ Outstanding</div>
+      <div style="font-family:var(--fh);font-size:1.4rem;font-weight:700;color:var(--p4-gold)">${p4Fmt(gt10)}</div>
+      <div style="font-size:.65rem;color:var(--muted);margin-top:2px">${(window.RECORDS_10KW||[]).filter(r=>!r.paid).length} months pending</div>
+    </div>
+    <div style="background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.2);border-radius:10px;padding:12px 14px">
+      <div style="font-size:.62rem;text-transform:uppercase;letter-spacing:.09em;color:var(--p4-red);font-weight:700;margin-bottom:4px">💰 Grand Total Outstanding</div>
+      <div style="font-family:var(--fh);font-size:1.4rem;font-weight:700;color:var(--p4-red)">${p4Fmt(gtTotal)}</div>
+      <div style="font-size:.65rem;color:var(--muted);margin-top:2px">₹${(gtTotal/10000000).toFixed(2)} Crore</div>
+    </div>
+  </div>`;
+
+  // ── Stage table ───────────────────────────────────────────────────
+  html += `<div style="overflow-x:auto">
+  <table style="width:100%;border-collapse:collapse;font-size:.82rem">
+    <thead>
+      <tr style="background:rgba(245,158,11,.08)">
+        <th style="padding:10px 14px;text-align:left;font-family:var(--fh);font-size:.75rem;color:var(--p4-gold);border-bottom:2px solid rgba(245,158,11,.2);white-space:nowrap">Pipeline Stage</th>
+        <th style="padding:10px 14px;text-align:right;font-family:var(--fh);font-size:.75rem;color:var(--teal);border-bottom:2px solid rgba(245,158,11,.2);white-space:nowrap">🔌 5KW — 70% Amt</th>
+        <th style="padding:10px 14px;text-align:right;font-family:var(--fh);font-size:.75rem;color:var(--sky);border-bottom:2px solid rgba(245,158,11,.2);white-space:nowrap">🔌 5KW — 30% Amt</th>
+        <th style="padding:10px 14px;text-align:right;font-family:var(--fh);font-size:.75rem;color:var(--p4-gold);border-bottom:2px solid rgba(245,158,11,.2);white-space:nowrap">⚡ 10KW+ Amt</th>
+        <th style="padding:10px 14px;text-align:right;font-family:var(--fh);font-size:.75rem;color:var(--purple);border-bottom:2px solid rgba(245,158,11,.2);white-space:nowrap">Total</th>
+        <th style="padding:10px 14px;text-align:center;font-family:var(--fh);font-size:.75rem;color:var(--muted);border-bottom:2px solid rgba(245,158,11,.2)">Details</th>
+      </tr>
+    </thead>
+    <tbody>`;
+
+  // All stages except PAID — union of active 70% and 30% stages
+  const allActiveStages = [...new Set([...activeStages70, ...activeStages30])];
+  // Sort by pipeline order
+  allActiveStages.sort((a,b) => P4_STAGE_ORDER.indexOf(a) - P4_STAGE_ORDER.indexOf(b));
+
+  allActiveStages.forEach(stage => {
+    const clr = sColor(stage);
+    const si  = p4SI(stage);
+    const v70 = s70map[stage];
+    const v30 = s30map[stage];
+    const rowTotal = (v70.amt||0) + (v30.amt5_30||0) + (v30.amt10||0);
+
+    // Detail chips
+    let detail = '';
+    if(v30.zones5.size) detail += `<span style="font-size:.63rem;background:rgba(0,196,216,.08);border:1px solid rgba(0,196,216,.18);border-radius:4px;padding:2px 7px;margin:2px;display:inline-block;color:var(--teal)">${v30.zones5.size} zone${v30.zones5.size>1?'s':''}</span>`;
+    if(v30.months10.length) detail += `<span style="font-size:.63rem;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.18);border-radius:4px;padding:2px 7px;margin:2px;display:inline-block;color:var(--p4-gold)">10KW: ${v30.months10.slice(0,2).join(', ')}${v30.months10.length>2?' +'+( v30.months10.length-2):''}</span>`;
+
+    html += `<tr style="border-bottom:1px solid rgba(245,158,11,.07)" onmouseover="this.style.background='rgba(245,158,11,.04)'" onmouseout="this.style.background=''">
+      <td style="padding:11px 14px">
+        <span style="display:inline-flex;align-items:center;gap:7px">
+          <span style="width:10px;height:10px;border-radius:50%;background:${clr};flex-shrink:0;box-shadow:0 0 6px ${clr}66"></span>
+          <span style="font-family:var(--fh);font-weight:700;font-size:.88rem;color:${clr}">${stage}</span>
+        </span>
+      </td>
+      <td style="padding:11px 14px;text-align:right;font-family:var(--fm);font-size:.82rem;color:${v70.amt>0?'var(--teal)':'rgba(100,116,139,.4)'}">
+        ${v70.amt>0?p4FmtFull(v70.amt):'—'}
+      </td>
+      <td style="padding:11px 14px;text-align:right;font-family:var(--fm);font-size:.82rem;color:${v30.amt5_30>0?'var(--sky)':'rgba(100,116,139,.4)'}">
+        ${v30.amt5_30>0?p4FmtFull(v30.amt5_30):'—'}
+      </td>
+      <td style="padding:11px 14px;text-align:right;font-family:var(--fm);font-size:.82rem;color:${v30.amt10>0?'var(--p4-gold)':'rgba(100,116,139,.4)'}">
+        ${v30.amt10>0?p4FmtFull(v30.amt10):'—'}
+      </td>
+      <td style="padding:11px 14px;text-align:right;font-family:var(--fh);font-weight:700;font-size:.9rem;color:var(--purple)">
+        ${rowTotal>0?p4FmtFull(rowTotal):'—'}
+      </td>
+      <td style="padding:11px 14px;text-align:center">${detail}</td>
     </tr>`;
   });
-  if(r10){
-    const amt10=r10.paid?0:r10.amount;gt_10kw=amt10;
-    rows+=`<tr style="border-top:2px solid rgba(245,158,11,.2);background:rgba(245,158,11,.03)">
-      <td class="p4-zone-cell" style="color:var(--p4-gold)">⚡ 10KW+</td>
-      <td class="p4-amt-cell" colspan="2" style="text-align:center;color:var(--muted);font-size:.7rem;font-style:italic">All zones combined</td>
-      <td class="p4-amt-cell" style="color:var(--muted)">—</td>
-      <td class="p4-amt-cell" style="color:${r10.paid?'var(--muted)':'var(--p4-gold)'}">
-        ${r10.paid?'<span style="color:var(--p4-green);font-size:.68rem">✅ Paid</span>':p4FmtFull(r10.amount)}</td>
-      <td style="text-align:center">${p4Badge(r10.status)}</td>
-      <td class="p4-total-cell" style="color:${r10.paid?'var(--muted)':'var(--p4-gold)'}">
-        ${r10.paid?'<span style="color:var(--p4-green);font-size:.68rem">✅ Clear</span>':p4FmtFull(r10.amount)}</td>
-    </tr>`;
-  }
-  document.getElementById('p4-main-tbody').innerHTML=rows;
-  const gtTotal=gt_70+gt_ret+gt_10kw;
-  document.getElementById('p4-main-tfoot').innerHTML=`<tr>
-    <td class="p4-zone-cell" style="color:var(--p4-gold)">GRAND TOTAL</td>
-    <td class="p4-amt-cell" style="color:var(--p4-sky)">${gt_70>0?p4FmtFull(gt_70):'—'}</td><td></td>
-    <td class="p4-amt-cell" style="color:var(--p4-gold)">${gt_ret>0?p4FmtFull(gt_ret):'—'}</td>
-    <td class="p4-amt-cell" style="color:var(--p4-gold)">${gt_10kw>0?p4FmtFull(gt_10kw):'—'}</td><td></td>
-    <td class="p4-total-cell">${gtTotal>0?p4FmtFull(gtTotal):'All Clear ✅'}</td>
-  </tr>`;
-  const pending=d5.filter(r=>r.status_30!=='PAID').length;
-  document.getElementById('p4-main-pc').textContent=`${p4SM} ${p4SY} · ${pending===0&&(!r10||r10.paid)?'All Clear ✅':`${pending} zones pending`}`;
+
+  // Grand total row
+  html += `</tbody>
+    <tfoot>
+      <tr style="background:rgba(245,158,11,.08);border-top:2px solid rgba(245,158,11,.25)">
+        <td style="padding:11px 14px;font-family:var(--fh);font-weight:700;color:var(--p4-gold)">GRAND TOTAL</td>
+        <td style="padding:11px 14px;text-align:right;font-family:var(--fm);font-weight:700;color:var(--teal)">${gt5_70>0?p4FmtFull(gt5_70):'—'}</td>
+        <td style="padding:11px 14px;text-align:right;font-family:var(--fm);font-weight:700;color:var(--sky)">${gt5_30>0?p4FmtFull(gt5_30):'—'}</td>
+        <td style="padding:11px 14px;text-align:right;font-family:var(--fm);font-weight:700;color:var(--p4-gold)">${gt10>0?p4FmtFull(gt10):'—'}</td>
+        <td style="padding:11px 14px;text-align:right;font-family:var(--fh);font-weight:700;font-size:.95rem;color:var(--purple)">${p4FmtFull(gtTotal)}</td>
+        <td></td>
+      </tr>
+    </tfoot>
+  </table></div>`;
+
+  document.getElementById('p4-pipeline-summary').innerHTML = html;
+  document.getElementById('p4-main-pc').textContent =
+    `${allActiveStages.length} stages · Total Outstanding: ${p4Fmt(gtTotal)}`;
 }
+
+
+// ── Pipeline: all pending months (month-wise, no zone breakdown) ────────────
 function p4RenderPipeline(){
-  let rows='',pendMonths=0,totalPend=0;
+  let rows='', pendMonths=0, totalPend=0;
+
   [...p4AMY].reverse().forEach(({month,year})=>{
-    const d5=RECORDS_5KW.filter(r=>r.month===month&&r.year===year&&r.status_30!=='PAID');
+    const d5=RECORDS_5KW.filter(r=>r.month===month&&r.year===year);
+    const pend5=d5.filter(r=>r.status_30!=='PAID');
     const r10=window.RECORDS_10KW?RECORDS_10KW.find(r=>r.month===month&&r.year===year&&!r.paid):null;
-    if(!d5.length&&!r10)return;
+    if(!pend5.length&&!r10) return;
+
     pendMonths++;
-    const amt5=d5.reduce((s,r)=>s+r.total,0),amt10=r10?r10.amount:0;
-    totalPend+=amt5+amt10;
+    const amt5=pend5.reduce((s,r)=>s+r.total,0);
+    const amt10=r10?r10.amount:0;
+    const total=amt5+amt10;
+    totalPend+=total;
     const isCur=month===p4SM&&year===p4SY;
-    const stages={};d5.forEach(r=>{const s=r.status_30||'';stages[s]=(stages[s]||0)+1;});
-    const pills=Object.entries(stages).map(([s,c])=>`<span class="p4-stage-cell ${p4SI(s).cls}" style="font-size:.63rem;margin:2px">${p4SI(s).label}<span style="background:rgba(0,0,0,.2);border-radius:2px;padding:0 4px;margin-left:3px">${c}</span></span>`).join('');
+
+    // 5KW stage summary
+    const stages5={};
+    pend5.forEach(r=>{const s=r.status_30||'';stages5[s]=(stages5[s]||0)+1;});
+    const pills5=Object.entries(stages5)
+      .sort((a,b)=>b[1]-a[1])
+      .map(([s,c])=>`${p4Badge(s)}<span style="font-size:.6rem;color:var(--muted);margin-left:2px">${c}z</span>`)
+      .join(' ');
+
     rows+=`<div class="p4-pipe-row${isCur?' p4-pipe-current':''}">
       <div>
-        <div style="font-family:var(--fh);font-weight:700;font-size:.9rem;color:${isCur?'var(--p4-gold)':'var(--text)'}">${month.slice(0,3).toUpperCase()} ${year}${isCur?'<span style="font-size:.52rem;background:var(--p4-gold);color:#000;padding:1px 5px;border-radius:3px;margin-left:6px;vertical-align:middle">NOW</span>':''}</div>
-        <div style="font-family:var(--fh);font-size:.95rem;font-weight:700;color:var(--p4-red);margin-top:2px">${p4Fmt(amt5+amt10)}</div>
+        <div style="font-family:var(--fh);font-weight:700;font-size:.9rem;color:${isCur?'var(--p4-gold)':'var(--text)'}">
+          ${month.slice(0,3).toUpperCase()} ${year}${isCur?'<span style="font-size:.52rem;background:var(--p4-gold);color:#000;padding:1px 5px;border-radius:3px;margin-left:6px;vertical-align:middle">NOW</span>':''}
+        </div>
+        <div style="font-family:var(--fh);font-size:1rem;font-weight:700;color:var(--p4-red);margin-top:3px">${p4Fmt(total)}</div>
         <div style="font-size:.6rem;color:var(--muted)">outstanding</div>
       </div>
       <div>
-        ${d5.length?`<div style="font-size:.6rem;color:var(--teal);font-weight:700;margin-bottom:3px">🔌 5KW — ${d5.length} zone${d5.length>1?'s':''} · ${p4Fmt(amt5)}</div>${pills}`:''}
-        ${r10?`<div style="margin-top:${d5.length?6:0}px;font-size:.6rem;color:var(--p4-gold);font-weight:700;margin-bottom:3px">⚡ 10KW — ${p4Fmt(r10.amount)}</div>${p4Badge(r10.status)}`:''}
+        ${pend5.length?`<div style="font-size:.6rem;color:var(--teal);font-weight:700;margin-bottom:4px">🔌 5KW — ${p4FmtFull(amt5)} · ${pend5.length} zone${pend5.length>1?'s':''}</div><div>${pills5}</div>`:''}
+        ${r10?`<div style="margin-top:${pend5.length?8:0}px;font-size:.6rem;color:var(--p4-gold);font-weight:700;margin-bottom:4px">⚡ 10KW — ${p4FmtFull(amt10)}</div>${p4Badge(r10.status)}`:''}
       </div>
-      <div style="display:flex;flex-wrap:wrap;gap:4px;align-content:flex-start">
-        ${d5.map(r=>`<span style="font-size:.62rem;background:rgba(0,196,216,.07);border:1px solid rgba(0,196,216,.15);border-radius:4px;padding:2px 8px;white-space:nowrap"><span style="color:var(--teal)">${r.zone}</span>${r.total>0?` <span style="color:var(--p4-gold);font-family:var(--fm)">${p4Fmt(r.total)}</span>`:''}</span>`).join('')}
-      </div>
+      <div></div>
     </div>`;
   });
-  if(!rows){document.getElementById('p4-pipeline-body').innerHTML='<div class="no-data" style="padding:24px"><div class="no-ico">🎉</div>Sab payments clear!</div>';document.getElementById('p4-pipe-pc').textContent='All cleared ✅';return;}
-  document.getElementById('p4-pipe-pc').textContent=`${pendMonths} months pending · ${p4Fmt(totalPend)} outstanding`;
+
+  if(!rows){
+    document.getElementById('p4-pipeline-body').innerHTML='<div class="no-data" style="padding:24px"><div class="no-ico">🎉</div>Sab payments clear hain!</div>';
+    document.getElementById('p4-pipe-pc').textContent='All cleared ✅';
+    return;
+  }
+  document.getElementById('p4-pipe-pc').textContent=`${pendMonths} month${pendMonths>1?'s':''} pending · Total Outstanding: ${p4Fmt(totalPend)}`;
   document.getElementById('p4-pipeline-body').innerHTML=rows;
 }
+// ── Tab switching ─────────────────────────────────────────
 function p4SwitchTab(t){
   p4CurTab=t;
-  ['5kw','10kw','trend'].forEach(x=>{document.getElementById('p4tab-'+x).classList.toggle('active',x===t);const panel=document.getElementById('p4panel-'+x);if(panel)panel.style.display=x===t?'':'none';});
+  ['5kw','10kw','trend'].forEach(x=>{
+    document.getElementById('p4tab-'+x).classList.toggle('active',x===t);
+    const panel=document.getElementById('p4panel-'+x);
+    if(panel)panel.style.display=x===t?'':'none';
+  });
   const d5=RECORDS_5KW.filter(r=>r.month===p4SM&&r.year===p4SY);
-  if(t==='5kw')p4RenderDetail5(d5);else if(t==='10kw')p4RenderDetail10();
+  if(t==='5kw')p4RenderDetail5(d5);
+  else if(t==='10kw')p4RenderDetail10();
+  // trend already rendered on init
 }
+
+// ── 5KW Detail table ─────────────────────────────────────
 function p4RenderDetail5(data){
   document.getElementById('p4-5kw-pc').textContent=data.length+' zones · '+p4SM+' '+p4SY;
   document.getElementById('p4tcnt-5kw').textContent=data.length;
@@ -1425,19 +1389,21 @@ function p4RenderDetail5(data){
     <td style="font-weight:700;color:var(--p4-gold)">${r.zone}</td>
     <td style="font-family:var(--fm);font-size:.75rem">${r.month.slice(0,3)} ${r.year}</td>
     <td style="font-family:var(--fm);font-size:.72rem">${r.invoice||'—'}</td>
-    <td class="p4-amt-cell" style="color:var(--p4-sky)">${r.basic>0?p4FmtFull(r.basic):'—'}</td>
-    <td class="p4-amt-cell" style="color:var(--muted)">${r.gst>0?p4FmtFull(r.gst):'—'}</td>
-    <td class="p4-amt-cell" style="color:var(--p4-gold);font-weight:700">${r.total>0?p4FmtFull(r.total):'—'}</td>
+    <td style="text-align:right;font-family:var(--fm);font-size:.75rem;color:var(--p4-sky)">${r.basic>0?p4FmtFull(r.basic):'—'}</td>
+    <td style="text-align:right;font-family:var(--fm);font-size:.75rem;color:var(--muted)">${r.gst>0?p4FmtFull(r.gst):'—'}</td>
+    <td style="text-align:right;font-family:var(--fh);font-size:.9rem;font-weight:700;color:var(--p4-gold)">${r.total>0?p4FmtFull(r.total):'—'}</td>
     <td style="text-align:center">${p4Badge(r.status_70)}</td>
-    <td class="p4-amt-cell">${r.amt_70>0?p4FmtFull(r.amt_70):'—'}</td>
+    <td style="text-align:right;font-family:var(--fm);font-size:.72rem;color:var(--p4-sky)">${r.amt_70>0?p4FmtFull(r.amt_70):'—'}</td>
     <td style="text-align:center">${p4Badge(r.status_30)}</td>
-    <td class="p4-amt-cell">${r.amt_30>0?p4FmtFull(r.amt_30):'—'}</td>
+    <td style="text-align:right;font-family:var(--fm);font-size:.72rem;color:var(--p4-gold)">${r.amt_30>0?p4FmtFull(r.amt_30):'—'}</td>
   </tr>`).join('');
   const pages=Math.ceil(data.length/P4_PAGE);
   let pgn=`<div class="pgn-in"><span class="pinfo">${start+1}–${Math.min(start+P4_PAGE,data.length)} of ${data.length}</span><div class="pbtns">`;
   for(let i=1;i<=pages;i++)pgn+=`<button class="pb${p4Page5===i?' act':''}" onclick="p4Page5=${i};p4RenderDetail5(RECORDS_5KW.filter(r=>r.month===p4SM&&r.year===p4SY))">${i}</button>`;
   document.getElementById('p4-5kw-pgn').innerHTML=pgn+`</div></div>`;
 }
+
+// ── 10KW Detail (all months history) ─────────────────────
 function p4RenderDetail10(){
   if(!window.RECORDS_10KW){document.getElementById('p4-10kw-tbody').innerHTML='<tr><td colspan="4" class="no-data">No 10KW data</td></tr>';return;}
   document.getElementById('p4tcnt-10kw').textContent=RECORDS_10KW.length;
@@ -1445,53 +1411,86 @@ function p4RenderDetail10(){
   const sorted=[...RECORDS_10KW].sort((a,b)=>{const d=parseInt(b.year)-parseInt(a.year);return d||P4M.indexOf(b.month)-P4M.indexOf(a.month);});
   document.getElementById('p4-10kw-tbody').innerHTML=sorted.map(r=>`<tr style="${!r.paid?'background:rgba(245,158,11,.04)':''}">
     <td style="font-family:var(--fh);font-weight:700;color:${r.paid?'var(--muted)':'var(--p4-gold)'}">${r.month.slice(0,3).toUpperCase()} ${r.year}</td>
-    <td class="p4-amt-cell" style="color:${r.paid?'var(--muted)':'var(--p4-gold)'}">
-      ${r.paid?`<span style="text-decoration:line-through;opacity:.45">${p4FmtFull(r.amount)}</span>`:p4FmtFull(r.amount)}</td>
+    <td style="text-align:right;font-family:var(--fh);font-size:.95rem;font-weight:700;color:${r.paid?'var(--muted)':'var(--p4-gold)'}">
+      ${r.paid?`<span style="text-decoration:line-through;opacity:.45">${p4FmtFull(r.amount)}</span>`:p4FmtFull(r.amount)}
+    </td>
     <td style="text-align:center">${p4Badge(r.status)}</td>
     <td style="text-align:center;font-size:.72rem;color:var(--muted)">${r.paid?'✅ Done':'⏳ Pending'}</td>
   </tr>`).join('');
 }
+
+// ── Trend heatmap ─────────────────────────────────────────
 function p4RenderTrend(){
   if(!window.RECORDS_5KW||!RECORDS_5KW.length)return;
-  const zones=[...new Set(RECORDS_5KW.map(r=>r.zone))].sort(),months=p4AMY;
+  const zones=[...new Set(RECORDS_5KW.map(r=>r.zone))].sort();
+  const months=p4AMY;
   let hd=`<tr><th style="text-align:left;position:sticky;left:0;background:var(--p4-surf);min-width:90px;font-size:.75rem">Zone</th>`;
   months.forEach(m=>hd+=`<th style="white-space:nowrap;text-align:center;font-size:.68rem;padding:6px 8px">${m.month.slice(0,3)}<br><span style="font-weight:400;color:var(--muted)">${m.year.slice(2)}</span></th>`);
-  hd+=`</tr>`;document.getElementById('p4-trend-head').innerHTML=hd;
+  hd+=`</tr>`;
+  document.getElementById('p4-trend-head').innerHTML=hd;
   let bd='';
   zones.forEach(z=>{
     bd+=`<tr><td style="position:sticky;left:0;background:var(--p4-surf2);font-weight:700;font-size:.78rem;color:var(--p4-gold);padding:6px 10px">${z}</td>`;
-    months.forEach(m=>{const rec=RECORDS_5KW.find(r=>r.zone===z&&r.month===m.month&&r.year===m.year);if(!rec){bd+=`<td style="color:rgba(100,100,100,.3);font-size:.6rem;text-align:center">—</td>`;return;}const si=p4SI(rec.status_30);bd+=`<td style="text-align:center;padding:4px"><span class="p4-stage-cell ${si.cls}" style="font-size:.57rem;padding:2px 4px;display:block">${si.label}</span></td>`;});
+    months.forEach(m=>{
+      const rec=RECORDS_5KW.find(r=>r.zone===z&&r.month===m.month&&r.year===m.year);
+      if(!rec){bd+=`<td style="color:rgba(100,100,100,.3);font-size:.6rem;text-align:center">—</td>`;return;}
+      const si=p4SI(rec.status_30);
+      bd+=`<td style="text-align:center;padding:4px"><span class="p4-stage-cell ${si.cls}" style="font-size:.57rem;padding:2px 4px;display:block">${si.label}</span></td>`;
+    });
     bd+=`</tr>`;
   });
   if(window.RECORDS_10KW&&RECORDS_10KW.length){
     bd+=`<tr style="border-top:2px solid rgba(245,158,11,.25)"><td style="position:sticky;left:0;background:var(--p4-surf2);font-weight:700;font-size:.78rem;color:var(--p4-gold);padding:6px 10px">⚡ 10KW+</td>`;
-    months.forEach(m=>{const rec=RECORDS_10KW.find(r=>r.month===m.month&&r.year===m.year);if(!rec){bd+=`<td style="color:rgba(100,100,100,.3);font-size:.6rem;text-align:center">—</td>`;return;}const si=p4SI(rec.status);bd+=`<td style="text-align:center;padding:4px"><span class="p4-stage-cell ${si.cls}" style="font-size:.57rem;padding:2px 4px;display:block">${si.label}</span></td>`;});
+    months.forEach(m=>{
+      const rec=RECORDS_10KW.find(r=>r.month===m.month&&r.year===m.year);
+      if(!rec){bd+=`<td style="color:rgba(100,100,100,.3);font-size:.6rem;text-align:center">—</td>`;return;}
+      const si=p4SI(rec.status);
+      bd+=`<td style="text-align:center;padding:4px"><span class="p4-stage-cell ${si.cls}" style="font-size:.57rem;padding:2px 4px;display:block">${si.label}</span></td>`;
+    });
     bd+=`</tr>`;
   }
   document.getElementById('p4-trend-body').innerHTML=bd;
+  // Bar chart
   const maxAmt=Math.max(...months.map(m=>RECORDS_5KW.filter(r=>r.month===m.month&&r.year===m.year).reduce((s,r)=>s+r.total,0)));
   let bars=`<div style="display:flex;align-items:flex-end;gap:4px;min-width:${months.length*42}px;height:80px;padding-top:10px">`;
-  months.forEach(m=>{const amt=RECORDS_5KW.filter(r=>r.month===m.month&&r.year===m.year).reduce((s,r)=>s+r.total,0);const allPaid=RECORDS_5KW.filter(r=>r.month===m.month&&r.year===m.year).every(r=>r.status_30==='PAID');const r10=window.RECORDS_10KW?RECORDS_10KW.find(r=>r.month===m.month&&r.year===m.year):null;const bothPaid=allPaid&&(!r10||r10.paid);const isSel=m.month===p4SM&&m.year===p4SY;const pct=maxAmt>0?Math.round(amt/maxAmt*100):0;const clr=bothPaid?'var(--p4-green)':isSel?'var(--p4-gold)':'var(--teal)';bars+=`<div style="flex:1;min-width:28px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer" onclick="p4SelM('${m.month}',{stopPropagation:()=>{}});p4SelY('${m.year}',{stopPropagation:()=>{}})"><div style="font-size:.52rem;color:var(--muted);white-space:nowrap">${p4Fmt(amt)}</div><div style="width:100%;height:${Math.max(pct*0.55,4)}px;background:${clr};border-radius:2px 2px 0 0;opacity:${isSel?1:.65}"></div><div style="font-size:.5rem;color:${isSel?'var(--p4-gold)':'var(--muted)'};text-align:center;font-weight:${isSel?700:400}">${m.month.slice(0,3)}<br>${m.year.slice(2)}</div></div>`;});
+  months.forEach(m=>{
+    const amt=RECORDS_5KW.filter(r=>r.month===m.month&&r.year===m.year).reduce((s,r)=>s+r.total,0);
+    const allPaid5=RECORDS_5KW.filter(r=>r.month===m.month&&r.year===m.year).every(r=>r.status_30==='PAID');
+    const r10=window.RECORDS_10KW?RECORDS_10KW.find(r=>r.month===m.month&&r.year===m.year):null;
+    const bothPaid=allPaid5&&(!r10||r10.paid);
+    const isSel=m.month===p4SM&&m.year===p4SY;
+    const pct=maxAmt>0?Math.round(amt/maxAmt*100):0;
+    const clr=bothPaid?'var(--p4-green)':isSel?'var(--p4-gold)':'var(--teal)';
+    bars+=`<div style="flex:1;min-width:28px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer" onclick="p4SelM('${m.month}',{stopPropagation:()=>{}});p4SelY('${m.year}',{stopPropagation:()=>{}})">
+      <div style="font-size:.52rem;color:var(--muted);white-space:nowrap">${p4Fmt(amt)}</div>
+      <div style="width:100%;height:${Math.max(pct*0.55,4)}px;background:${clr};border-radius:2px 2px 0 0;opacity:${isSel?1:.65}"></div>
+      <div style="font-size:.5rem;color:${isSel?'var(--p4-gold)':'var(--muted)'};text-align:center;font-weight:${isSel?700:400}">${m.month.slice(0,3)}<br>${m.year.slice(2)}</div>
+    </div>`;
+  });
   bars+=`</div><div style="font-size:.62rem;color:var(--muted);margin-top:6px">🟢 Both paid &nbsp;|&nbsp; 🟡 Current &nbsp;|&nbsp; 🔵 Others</div>`;
   document.getElementById('p4-amt-trend').innerHTML=bars;
 }
+
 function p4Reset(){p4ApplyF();}
+
 function p4Export(){
   const d5=RECORDS_5KW.filter(r=>r.month===p4SM&&r.year===p4SY);
-  const rows=[['Zone','Month','Year','Invoice','Basic','GST','Total','70% Stage','70% Amt','30% Stage','30% Amt']];
-  d5.forEach(r=>rows.push([r.zone,r.month,r.year,r.invoice,r.basic,r.gst,r.total,r.status_70,r.amt_70,r.status_30,r.amt_30]));
+  const rows=[['Type','Zone/Scope','Month','Year','Invoice','Basic','GST','Total','70% Stage','70% Amt','30% Stage','30% Amt']];
+  d5.forEach(r=>rows.push(['5KW',r.zone,r.month,r.year,r.invoice,r.basic,r.gst,r.total,r.status_70,r.amt_70,r.status_30,r.amt_30]));
   const r10=window.RECORDS_10KW?RECORDS_10KW.find(r=>r.month===p4SM&&r.year===p4SY):null;
-  if(r10)rows.push(['10KW-ALL','','','','','',r10.amount,r10.status,'','','']);
+  if(r10)rows.push(['10KW','All Zones',r10.month,r10.year,'','','',r10.amount,r10.status,'','','']);
   const csv=rows.map(r=>r.map(v=>`"${v||''}"`).join(',')).join('\n');
-  const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(csv);a.download=`MRI_Financial_${p4SM}_${p4SY}.csv`;a.click();
+  const a=document.createElement('a');
+  a.href='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(csv);
+  a.download=`MRI_Financial_${p4SM}_${p4SY}.csv`;a.click();
 }
+
 const _p4OS=window.switchProj;
-window.switchProj=function(id){_p4OS&&_p4OS(id);if(id==='p4'&&!p4AMY.length)p4Init();};
+window.switchProj=function(id){
+  _p4OS&&_p4OS(id);
+  if(id==='p4'&&!p4AMY.length)p4Init();
+};
 
-
-</script>
-<script>
-__DATA_PLACEHOLDER__
 </script>
 </body>
 </html>
