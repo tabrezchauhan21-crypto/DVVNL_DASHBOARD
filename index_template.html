@@ -550,7 +550,11 @@ tr:last-child td{border-bottom:none}
         <div class="hdr-sub">Chief Manager of Operations · Discom Head · SAI Computers Ltd.</div>
       </div>
       <div class="hdr-r">
-        <div class="live-b"><span class="dot"></span>LIVE</div>
+        <div class="live-b" id="last-updated-badge" style="cursor:default;gap:8px;padding:3px 12px">
+          <span style="font-size:.65rem;color:var(--muted);font-weight:400">Last Updated:</span>
+          <span id="last-updated-ts" style="font-family:var(--fm);letter-spacing:.02em">—</span>
+        </div>
+        <button class="logout-btn" id="refresh-btn" onclick="doManualRefresh()" style="border-color:rgba(0,196,216,.3);color:var(--teal)" title="Reload latest data">⟳ Refresh</button>
         <div class="user-badge">
           <div class="user-av">T</div>
           <span class="user-name">Tabrez</span>
@@ -769,14 +773,7 @@ tr:last-child td{border-bottom:none}
         <div id="p4-pipeline-summary" style="padding:16px"></div>
       </div>
 
-      <!-- PENDING PIPELINE -->
-      <div class="panel" style="border-radius:11px;margin-bottom:14px">
-        <div class="ph">
-          <span class="pt" style="color:var(--p4-gold)">📋 Outstanding Pipeline — All Pending Months</span>
-          <span class="pc" id="p4-pipe-pc">Paid months excluded</span>
-        </div>
-        <div id="p4-pipeline-body" style="padding:0"></div>
-      </div>
+
 
       <!-- SUB-TABS -->
       <div class="p4-tabs">
@@ -906,7 +903,7 @@ function initDashboard(){
   });
   const last=availMY[availMY.length-1];
   selMonth=last.month;selYear=last.year;
-  buildPop();updateMDisplay();buildZoneFilter();applyF();
+  buildPop();updateMDisplay();buildZoneFilter();applyF();initLastUpdated();
   document.addEventListener('click',e=>{if(!e.target.closest('#mdisplay'))document.getElementById('mpop').classList.remove('open');});
 }
 
@@ -1095,6 +1092,28 @@ if(typeof MONTHLY_STATUS!=='undefined'&&typeof MASTER_ALL!=='undefined'){
   window.addEventListener('load',()=>{});
 }
 
+// ── Last Updated timestamp ────────────────────────────────
+function initLastUpdated(){
+  // data_v4.js first line: // Auto-updated: DD Mon YYYY HH:MM | ...
+  // We embed the timestamp as a JS variable during build
+  try {
+    const ts = (typeof DATA_UPDATED_AT !== 'undefined') ? DATA_UPDATED_AT : '';
+    const el = document.getElementById('last-updated-ts');
+    if(el && ts) el.textContent = ts;
+  } catch(e){}
+}
+
+function doManualRefresh(){
+  const btn = document.getElementById('refresh-btn');
+  if(btn){ btn.textContent = '⟳ Loading...'; btn.disabled = true; }
+  // Force reload bypassing cache
+  const url = new URL(window.location.href);
+  url.searchParams.set('_t', Date.now());
+  window.location.href = url.toString();
+}
+
+
+
 
 // P4 FINANCIAL v4
 const P4M=['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -1165,11 +1184,14 @@ function p4RenderMainTable(){
 
   // 5KW: all records (all months combined)
   RECORDS_5KW.forEach(r => {
+    const mon = r.month.slice(0,3)+' '+r.year;
     // 70% stage
     const s70 = r.status_70||'';
     if(s70 !== 'PAID' && s70map[s70]) {
       s70map[s70].amt += r.amt_70||0;
       s70map[s70].zones.add(r.zone);
+      s70map[s70].months = s70map[s70].months||new Set();
+      s70map[s70].months.add(mon);
     }
     // 30% stage
     const s30 = r.status_30||'';
@@ -1271,8 +1293,19 @@ function p4RenderMainTable(){
 
     // Detail chips
     let detail = '';
-    if(v30.zones5.size) detail += `<span style="font-size:.63rem;background:rgba(0,196,216,.08);border:1px solid rgba(0,196,216,.18);border-radius:4px;padding:2px 7px;margin:2px;display:inline-block;color:var(--teal)">${v30.zones5.size} zone${v30.zones5.size>1?'s':''}</span>`;
-    if(v30.months10.length) detail += `<span style="font-size:.63rem;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.18);border-radius:4px;padding:2px 7px;margin:2px;display:inline-block;color:var(--p4-gold)">10KW: ${v30.months10.slice(0,2).join(', ')}${v30.months10.length>2?' +'+( v30.months10.length-2):''}</span>`;
+    // 70%: show each month as chip
+    const months70 = v70.months ? [...v70.months].sort() : [];
+    months70.forEach(m => {
+      detail += `<span style="font-size:.62rem;background:rgba(0,196,216,.08);border:1px solid rgba(0,196,216,.2);border-radius:4px;padding:2px 7px;margin:2px;display:inline-block;color:var(--teal)">70%: ${m}</span>`;
+    });
+    // 30%: show zone count only
+    if(v30.zones5.size){
+      detail += `<span style="font-size:.62rem;background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.2);border-radius:4px;padding:2px 7px;margin:2px;display:inline-block;color:var(--sky)">30%: ${v30.zones5.size} zone${v30.zones5.size>1?'s':''}</span>`;
+    }
+    // 10KW: show each month as chip
+    v30.months10.forEach(m => {
+      detail += `<span style="font-size:.62rem;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:4px;padding:2px 7px;margin:2px;display:inline-block;color:var(--p4-gold)">10KW: ${m}</span>`;
+    });
 
     html += `<tr style="border-bottom:1px solid rgba(245,158,11,.07)" onmouseover="this.style.background='rgba(245,158,11,.04)'" onmouseout="this.style.background=''">
       <td style="padding:11px 14px">
@@ -1317,55 +1350,10 @@ function p4RenderMainTable(){
 }
 
 
-// ── Pipeline: all pending months (month-wise, no zone breakdown) ────────────
-function p4RenderPipeline(){
-  let rows='', pendMonths=0, totalPend=0;
+// ── Pipeline render (disabled — summary shown in main panel) ────────────────
+function p4RenderPipeline(){ /* removed — stage summary shown above */ }
 
-  [...p4AMY].reverse().forEach(({month,year})=>{
-    const d5=RECORDS_5KW.filter(r=>r.month===month&&r.year===year);
-    const pend5=d5.filter(r=>r.status_30!=='PAID');
-    const r10=window.RECORDS_10KW?RECORDS_10KW.find(r=>r.month===month&&r.year===year&&!r.paid):null;
-    if(!pend5.length&&!r10) return;
 
-    pendMonths++;
-    const amt5=pend5.reduce((s,r)=>s+r.total,0);
-    const amt10=r10?r10.amount:0;
-    const total=amt5+amt10;
-    totalPend+=total;
-    const isCur=month===p4SM&&year===p4SY;
-
-    // 5KW stage summary
-    const stages5={};
-    pend5.forEach(r=>{const s=r.status_30||'';stages5[s]=(stages5[s]||0)+1;});
-    const pills5=Object.entries(stages5)
-      .sort((a,b)=>b[1]-a[1])
-      .map(([s,c])=>`${p4Badge(s)}<span style="font-size:.6rem;color:var(--muted);margin-left:2px">${c}z</span>`)
-      .join(' ');
-
-    rows+=`<div class="p4-pipe-row${isCur?' p4-pipe-current':''}">
-      <div>
-        <div style="font-family:var(--fh);font-weight:700;font-size:.9rem;color:${isCur?'var(--p4-gold)':'var(--text)'}">
-          ${month.slice(0,3).toUpperCase()} ${year}${isCur?'<span style="font-size:.52rem;background:var(--p4-gold);color:#000;padding:1px 5px;border-radius:3px;margin-left:6px;vertical-align:middle">NOW</span>':''}
-        </div>
-        <div style="font-family:var(--fh);font-size:1rem;font-weight:700;color:var(--p4-red);margin-top:3px">${p4Fmt(total)}</div>
-        <div style="font-size:.6rem;color:var(--muted)">outstanding</div>
-      </div>
-      <div>
-        ${pend5.length?`<div style="font-size:.6rem;color:var(--teal);font-weight:700;margin-bottom:4px">🔌 5KW — ${p4FmtFull(amt5)} · ${pend5.length} zone${pend5.length>1?'s':''}</div><div>${pills5}</div>`:''}
-        ${r10?`<div style="margin-top:${pend5.length?8:0}px;font-size:.6rem;color:var(--p4-gold);font-weight:700;margin-bottom:4px">⚡ 10KW — ${p4FmtFull(amt10)}</div>${p4Badge(r10.status)}`:''}
-      </div>
-      <div></div>
-    </div>`;
-  });
-
-  if(!rows){
-    document.getElementById('p4-pipeline-body').innerHTML='<div class="no-data" style="padding:24px"><div class="no-ico">🎉</div>Sab payments clear hain!</div>';
-    document.getElementById('p4-pipe-pc').textContent='All cleared ✅';
-    return;
-  }
-  document.getElementById('p4-pipe-pc').textContent=`${pendMonths} month${pendMonths>1?'s':''} pending · Total Outstanding: ${p4Fmt(totalPend)}`;
-  document.getElementById('p4-pipeline-body').innerHTML=rows;
-}
 // ── Tab switching ─────────────────────────────────────────
 function p4SwitchTab(t){
   p4CurTab=t;

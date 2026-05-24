@@ -249,6 +249,7 @@ data_js = (
     f"// Auto-updated: {ts}\n"
     f"// Form:{len(form_records)} | 5KW:{len(RECORDS_5KW)}recs/{months_5kw}mo"
     f" | 10KW:{len(RECORDS_10KW)}mo | C4:{len(RECORDS_C4)}recs/{months_c4}mo\n"
+    f"const DATA_UPDATED_AT='{ts}';\n"
     f"const MASTER_ALL={json.dumps(MASTER_ALL,   separators=(',',':'))};\n"
     f"const MONTHLY_STATUS={json.dumps(MONTHLY_STATUS, separators=(',',':'))};\n"
     f"const FORM_RECORDS={json.dumps(FORM_RECORDS,   separators=(',',':'))};\n"
