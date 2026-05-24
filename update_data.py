@@ -244,7 +244,9 @@ print(f"[C4] Records: {len(RECORDS_C4)} | Months: {months_c4} | Zones: {zones_c4
 
 # ── 8. Write data_v4.js ───────────────────────────────────
 print("\n[Build] Writing data_v4.js...")
-ts = datetime.now().strftime('%d %b %Y %H:%M')
+from datetime import timezone, timedelta
+IST = timezone(timedelta(hours=5, minutes=30))
+ts = datetime.now(IST).strftime('%d %b %Y %H:%M') + ' IST'
 data_js = (
     f"// Auto-updated: {ts}\n"
     f"// Form:{len(form_records)} | 5KW:{len(RECORDS_5KW)}recs/{months_5kw}mo"
