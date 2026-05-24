@@ -1082,6 +1082,167 @@ function doExport(){
   const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(csv);a.download=`DVVNL_10KW_${selMonth}_${selYear}.csv`;a.click();
 }
 
+var p2SM="",p2SY="",p2AMY=[],p2Data=[],p2All=[];
+function p2Init(){
+  var seen={};
+  RECORDS_5KW.forEach(function(r){var k=r.month+"|"+r.year;if(!seen[k]&&r.month&&r.year){seen[k]=1;p2AMY.push({month:r.month,year:r.year});}});
+  p2AMY.sort(function(a,b){var ya=parseInt(a.year),yb=parseInt(b.year);if(ya!==yb)return ya-yb;return MONTHS_ARR.indexOf(a.month)-MONTHS_ARR.indexOf(b.month);});
+  var last=p2AMY[p2AMY.length-1];
+  p2SM=last.month;p2SY=last.year;
+  var zones=[...new Set(RECORDS_5KW.map(function(r){return r.zone;}))].sort();
+  var sel=document.getElementById("p2-zone");
+  if(sel){zones.forEach(function(z){var o=document.createElement("option");o.value=z;o.textContent=z;sel.appendChild(o);});}
+  p2BuildPop();p2UpdDisp();p2ApplyF();p2Trend();
+  document.addEventListener("click",function(e){if(!e.target.closest("#p2-md"))document.getElementById("p2-pop").style.display="none";});
+}
+function p2BuildPop(){
+  var years=[...new Set(p2AMY.map(function(m){return m.year;}))].sort();
+  var h="<div style=\"display:flex;gap:5px;justify-content:center;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--border)\">";
+  years.forEach(function(y){h+="<span onclick=\"p2SelY('"+y+"',event)\" style=\"padding:3px 13px;border-radius:20px;cursor:pointer;font-size:.78rem;border:1px solid "+(y===p2SY?"var(--teal)":"transparent")+";background:"+(y===p2SY?"rgba(0,196,216,.18)":"transparent")+";color:"+(y===p2SY?"var(--teal)":"var(--muted)")+"\">"+y+"</span>";});
+  h+="</div><div style=\"display:grid;grid-template-columns:repeat(4,1fr);gap:5px\">";
+  MONTHS_ARR.forEach(function(m){
+    var has=p2AMY.some(function(my){return my.month===m&&my.year===p2SY;});
+    var isSel=m===p2SM;
+    h+="<span onclick=\""+(has?"p2SelM('"+m+"',event)":"event.stopPropagation()")+"\" style=\"padding:6px;border-radius:6px;font-size:.77rem;text-align:center;cursor:"+(has?"pointer":"not-allowed")+";border:1px solid "+(isSel?"var(--teal)":"transparent")+";background:"+(isSel?"rgba(0,196,216,.18)":"transparent")+";color:"+(isSel?"var(--teal)":has?"var(--text2)":"rgba(100,116,139,.3)")+";font-weight:"+(isSel?700:400)+"\">"+m.slice(0,3)+"</span>";
+  });
+  h+="</div>";
+  document.getElementById("p2-pop").innerHTML=h;
+}
+function p2TglPop(e){e.stopPropagation();var p=document.getElementById("p2-pop");p.style.display=p.style.display==="block"?"none":"block";}
+function p2SelY(y,e){e.stopPropagation();p2SY=y;var av=p2AMY.filter(function(m){return m.year===y;});if(!av.some(function(m){return m.month===p2SM;}))p2SM=av[av.length-1].month;p2BuildPop();document.getElementById("p2-pop").style.display="block";p2UpdDisp();p2ApplyF();}
+function p2SelM(m,e){e.stopPropagation();p2SM=m;p2BuildPop();document.getElementById("p2-pop").style.display="none";p2UpdDisp();p2ApplyF();}
+function p2ShiftM(d){var i=p2AMY.findIndex(function(m){return m.month===p2SM&&m.year===p2SY;});var ni=i+d;if(ni>=0&&ni<p2AMY.length){p2SM=p2AMY[ni].month;p2SY=p2AMY[ni].year;p2UpdDisp();p2BuildPop();p2ApplyF();}}
+function p2UpdDisp(){document.getElementById("p2-md").childNodes[0].textContent=p2SM+" "+p2SY+" ";var i=p2AMY.findIndex(function(m){return m.month===p2SM&&m.year===p2SY;});document.getElementById("p2-prev").disabled=i<=0;document.getElementById("p2-next").disabled=i>=p2AMY.length-1;}
+function p2ApplyF(){
+  var fZ=document.getElementById("p2-zone")?.value||"";
+  var fS=document.getElementById("p2-stage")?.value||"";
+  var data=RECORDS_5KW.filter(function(r){return r.month===p2SM&&r.year===p2SY;});
+  if(fZ)data=data.filter(function(r){return r.zone===fZ;});
+  p2All=data;
+  var pending=data.filter(function(r){return !p2Paid(r);});
+  if(fS)pending=pending.filter(function(r){return r.status_30===fS||r.status_70===fS;});
+  p2Data=pending;
+  var paidZ=data.filter(function(r){return p2Paid(r);});
+  var info=document.getElementById("p2-paid-info");
+  if(info){
+    if(paidZ.length>0){
+      info.innerHTML="<span style=\"background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);border-radius:8px;padding:5px 14px;font-size:.75rem;color:var(--green)\">✅ "+paidZ.length+" zone"+(paidZ.length>1?"s":"")+" fully PAID (hidden): "+paidZ.map(function(r){return r.zone;}).join(", ")+"</span>";
+    }else{info.innerHTML="";}
+  }
+  p2Hero(paidZ.length);p2KPIs();p2Summary();p2ZoneTable();
+}
+function p2Hero(paidCnt){
+  var tot=p2All.length,pnd=p2Data.length;
+  var p70=p2All.filter(function(r){return r.status_70==="PAID";}).length;
+  var p30=p2All.filter(function(r){return r.status_30==="PAID";}).length;
+  var pc70=tot>0?Math.round(p70/tot*100):0,pc30=tot>0?Math.round(p30/tot*100):0;
+  var clr=pc30>=80?"var(--green)":pc30>=50?"var(--gold)":"var(--red)";
+  var lbl=pc30>=80?"✅ On Track":pc30>=50?"⚠ In Progress":"🔴 Needs Attention";
+  document.getElementById("p2-hero").innerHTML="<div><div class=\"hero-month\">"+p2SM+" "+p2SY+"</div><div style=\"font-size:.72rem;color:var(--muted);margin-top:3px\">"+lbl+"</div></div><div class=\"hero-bar-wrap\"><div class=\"hero-lbl\"><span>70% Paid: <strong style=\"color:var(--green)\">"+p70+"/"+tot+"</strong></span><span style=\"color:var(--green)\"><strong>"+pc70+"%</strong></span></div><div class=\"hero-bar\"><div class=\"hero-fill\" style=\"width:"+pc70+"%;background:var(--green)\"></div></div><div style=\"margin-top:7px\"><div class=\"hero-lbl\"><span>30% Paid: <strong style=\"color:"+clr+"\">"+p30+"/"+tot+"</strong></span><span style=\"color:"+clr+"\"><strong>"+pc30+"%</strong></span></div><div class=\"hero-bar\" style=\"margin-top:4px\"><div class=\"hero-fill\" style=\"width:"+pc30+"%;background:"+clr+"\"></div></div></div></div><div class=\"hero-stats\"><div class=\"hs\"><div class=\"hs-v\" style=\"color:var(--green)\">"+paidCnt+"</div><div class=\"hs-l\">Fully Paid</div></div><div class=\"hs\"><div class=\"hs-v\" style=\"color:var(--red)\">"+pnd+"</div><div class=\"hs-l\">Pending</div></div><div class=\"hs\"><div class=\"hs-v\" style=\"color:var(--teal)\">"+tot+"</div><div class=\"hs-l\">Total</div></div></div>";
+}
+function p2KPIs(){
+  var tot=p2Data.length;
+  // 70% stages
+  var s70=["PAID","SUBMIT TO HV CELL"];
+  var c70={"PAID":"var(--green)","SUBMIT TO HV CELL":"var(--teal)"};
+  var cnt70={};
+  s70.forEach(function(s){cnt70[s]=0;});
+  p2All.forEach(function(r){if(cnt70[r.status_70]!==undefined)cnt70[r.status_70]++;});
+  // 30% stages
+  var s30=["PAID","ERP","SUBMIT TO HV CELL","UNDER VERIFICATION","CPC","ANNEXURE SUBMIT TO ZONE"];
+  var c30={"PAID":"var(--green)","ERP":"#10b981","SUBMIT TO HV CELL":"var(--teal)","UNDER VERIFICATION":"#f97316","CPC":"var(--gold)","ANNEXURE SUBMIT TO ZONE":"var(--sky)"};
+  var cnt30={};
+  s30.forEach(function(s){cnt30[s]=0;});
+  p2All.forEach(function(r){if(cnt30[r.status_30]!==undefined)cnt30[r.status_30]++;});
+  var allTot=p2All.length;
+  var html70=s70.map(function(s){
+    var c=c70[s],pct=allTot>0?Math.round(cnt70[s]/allTot*100):0,lb=ST5[s]?ST5[s].lb:s;
+    return "<div class=\"kpi\" style=\"--ac:"+c+";cursor:default\"><div class=\"kpi-l\">70% — "+lb+"</div><div class=\"kpi-v\">"+cnt70[s]+"</div><div class=\"kpi-s\">"+pct+"% of "+allTot+" zones</div><div class=\"kpi-bar\"><div class=\"kpi-f\" style=\"width:"+pct+"%;background:"+c+"\"></div></div></div>";
+  }).join("");
+  var html30=s30.map(function(s){
+    var c=c30[s],pct=allTot>0?Math.round(cnt30[s]/allTot*100):0,lb=ST5[s]?ST5[s].lb:s;
+    return "<div class=\"kpi\" style=\"--ac:"+c+";cursor:default\"><div class=\"kpi-l\">30% — "+lb+"</div><div class=\"kpi-v\">"+cnt30[s]+"</div><div class=\"kpi-s\">"+pct+"% of "+allTot+" zones</div><div class=\"kpi-bar\"><div class=\"kpi-f\" style=\"width:"+pct+"%;background:"+c+"\"></div></div></div>";
+  }).join("");
+  document.getElementById("p2-kpis").innerHTML=html70+html30;
+}
+function p2ZoneTable(){
+  var pc=document.getElementById("p2-pc2");
+  if(pc)pc.textContent=p2Data.length+" zones pending";
+  var tb=document.getElementById("p2-zone-tbody");
+  if(!p2Data.length){tb.innerHTML="<tr><td colspan=\"4\"><div class=\"no-data\"><div class=\"no-ico\">✅</div>All zones 30% PAID for "+p2SM+" "+p2SY+"!</div></td></tr>";return;}
+  tb.innerHTML=p2Data.map(function(r){return "<tr><td><span class=\"zch\" style=\"font-size:.82rem;padding:3px 10px\">"+r.zone+"</span></td><td style=\"font-family:var(--fm);font-size:.75rem;color:var(--muted)\">"+(r.invoice||"—")+"</td><td style=\"text-align:center\">"+p2Badge(r.status_70,true)+"</td><td style=\"text-align:center\">"+p2Badge(r.status_30,true)+"</td></tr>";}).join("");
+}
+function p2Summary(){
+  // Group pending zones by 30% stage
+  var stages=["UNDER VERIFICATION","ANNEXURE SUBMIT TO ZONE","CPC","SUBMIT TO HV CELL","ERP"];
+  var stageColors={"UNDER VERIFICATION":"#f97316","ANNEXURE SUBMIT TO ZONE":"var(--sky)","CPC":"var(--gold)","SUBMIT TO HV CELL":"var(--teal)","ERP":"#10b981"};
+  var stageNames={"UNDER VERIFICATION":"Under Verification","ANNEXURE SUBMIT TO ZONE":"Annexure Submit to Zone","CPC":"CPC","SUBMIT TO HV CELL":"Submit to HV Cell","ERP":"ERP (SAP Entry)"};
+  var grouped={};
+  stages.forEach(function(s){grouped[s]=[];});
+  p2Data.forEach(function(r){
+    if(grouped[r.status_30]!==undefined) grouped[r.status_30].push(r);
+  });
+  // Count non-empty stages
+  var activeStages=stages.filter(function(s){return grouped[s].length>0;});
+  var pc=document.getElementById("p2-sum-pc");
+  if(pc)pc.textContent=activeStages.length+" active stages";
+  var grid=document.getElementById("p2-summary-grid");
+  if(!grid)return;
+  if(p2Data.length===0){
+    grid.innerHTML="<div class=\"no-data\" style=\"grid-column:1/-1\"><div class=\"no-ico\">✅</div>All zones 30% PAID!</div>";
+    return;
+  }
+  grid.innerHTML=activeStages.map(function(s){
+    var zones=grouped[s];
+    var c=stageColors[s]||"var(--muted)";
+    var name=stageNames[s]||s;
+    var zoneChips=zones.map(function(r){
+      return "<span style=\"display:inline-block;padding:3px 10px;border-radius:6px;font-size:.75rem;font-weight:600;background:var(--surf);border:1px solid var(--border);color:var(--text);margin:2px\">"+r.zone+"</span>";
+    }).join("");
+    return "<div style=\"background:var(--surf);border:1px solid "+c.replace("var(--","").replace(")","")+"11,"+c+");border-radius:10px;overflow:hidden\">"+
+      "<div style=\"padding:10px 14px;background:"+c.replace("var(","").replace(")","")+"11;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center\">"+
+        "<span style=\"font-family:var(--fh);font-size:.88rem;font-weight:700;color:"+c+"\">"+name+"</span>"+
+        "<span style=\"background:"+c+"22;border:1px solid "+c+"44;border-radius:20px;padding:2px 10px;font-size:.72rem;font-weight:700;color:"+c+"\">"+zones.length+" zone"+(zones.length>1?"s":"")+"</span>"+
+      "</div>"+
+      "<div style=\"padding:10px 14px;display:flex;flex-wrap:wrap;gap:4px\">"+zoneChips+"</div>"+
+    "</div>";
+  }).join("");
+}
+function p2Trend(){
+  var zones=[...new Set(RECORDS_5KW.map(function(r){return r.zone;}))].sort();
+  var th="<tr style=\"background:rgba(0,111,168,.1)\"><th style=\"padding:7px 12px;font-family:var(--fh);font-size:.75rem;color:var(--teal);border-bottom:1px solid var(--border);text-align:left;white-space:nowrap;position:sticky;left:0;background:var(--surf2)\">Zone</th>";
+  p2AMY.forEach(function(m){th+="<th style=\"padding:5px 6px;font-family:var(--fh);font-size:.63rem;color:var(--teal);border-bottom:1px solid var(--border);text-align:center;white-space:nowrap;min-width:62px\">"+m.month.slice(0,3)+"<br><span style=\"color:var(--muted)\">"+m.year.slice(2)+"</span></th>";});
+  th+="</tr>";
+  document.getElementById("p2-trend-head").innerHTML=th;
+  var tb="";
+  zones.forEach(function(z,zi){
+    var zr=RECORDS_5KW.filter(function(r){return r.zone===z;});
+    var paid=zr.filter(function(r){return p2Paid(r);}).length;
+    var tot=zr.length,pct=tot>0?Math.round(paid/tot*100):0;
+    var clr=pct>=80?"var(--green)":pct>=50?"var(--gold)":"var(--red)";
+    tb+="<tr style=\""+(zi%2===0?"background:rgba(0,111,168,.03)":"")+"\"><td style=\"padding:6px 12px;font-size:.78rem;font-weight:600;color:var(--text);white-space:nowrap;border-bottom:1px solid rgba(0,111,168,.07);position:sticky;left:0;background:"+(zi%2===0?"var(--surf2)":"var(--surf)")+"\">"+z+"<span style=\"margin-left:6px;font-size:.65rem;color:"+clr+"\">"+pct+"%</span></td>";
+    p2AMY.forEach(function(m){
+      var rec=RECORDS_5KW.find(function(r){return r.zone===z&&r.month===m.month&&r.year===m.year;});
+      var s30=rec?rec.status_30:"",s70=rec?rec.status_70:"";
+      var fp=s70==="PAID"&&s30==="PAID";
+      var st=ST5[s30]||ST5[""];
+      var cell=fp?"<span style=\"display:inline-block;padding:2px 5px;border-radius:4px;font-size:.62rem;font-weight:700;background:rgba(34,197,94,.13);color:var(--green);border:1px solid rgba(34,197,94,.3)\">✓ PAID</span>":"<span style=\"display:inline-block;padding:2px 5px;border-radius:4px;font-size:.62rem;font-weight:700;background:"+st.bg+";color:"+st.c+";border:1px solid "+st.br+"\">"+st.lb+"</span>";
+      tb+="<td style=\"padding:4px 4px;text-align:center;border-bottom:1px solid rgba(0,111,168,.07)\">"+cell+"</td>";
+    });
+    tb+="</tr>";
+  });
+  document.getElementById("p2-trend-body").innerHTML=tb;
+}
+function p2Reset(){document.getElementById("p2-zone").value="";document.getElementById("p2-stage").value="";p2ApplyF();}
+function p2Export(){
+  var rows=[["Zone","Month","Year","Invoice No.","70% Status","30% Status","Fully Paid"]];
+  p2All.forEach(function(r){rows.push([r.zone,r.month,r.year,r.invoice||"",r.status_70,r.status_30,p2Paid(r)?"YES":"NO"]);});
+  var csv=rows.map(function(r){return r.map(function(c){return "\""+String(c||"").replace(/"/g,"\"\"")+"\""}).join(",");}).join("\n");
+  var a=document.createElement("a");a.href="data:text/csv;charset=utf-8,\uFEFF"+encodeURIComponent(csv);a.download="5KW_"+p2SM+"_"+p2SY+".csv";a.click();
+}
+
+
+
 
 __DATA_PLACEHOLDER__
 
